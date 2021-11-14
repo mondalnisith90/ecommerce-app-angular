@@ -1,0 +1,42 @@
+.navbar {
+  background-color: white;
+}
+
+.nav_link {
+  font-size: 22px;
+  font-weight: 500;
+  color: #7d787a !important;
+}
+
+.nav_link:hover {
+  color: #02d963 !important;
+}
+
+/* .active-link {
+  background-color: black;
+} */
+
+.add_to_cart_icon {
+  font-size: 40px;
+  font-weight: 700 !important;
+  color: #e00263;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  font-weight: 900;
+  color: #aa00ee;
+}
+
+/* .navbar-brand:hover {
+  color: #e00263;
+} */
+
+a.active {
+  /* color: #e00263 !important; */
+  border-bottom: 6px solid #02d963;
+  color: #02d963 !important;
+  font-weight: 500 !important;
+}

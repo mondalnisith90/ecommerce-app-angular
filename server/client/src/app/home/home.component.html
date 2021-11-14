@@ -1,0 +1,7 @@
+<div class="root_div">
+    <div class="header_div container">
+        <div class="category_items_div row">
+            <app-category-item-card class="col-lg-1 col-md-1 col-sm-2 col-3 card me-2 my-1" style="width: 100px !important; height: 100px !important; cursor: pointer;" *ngFor="let category of productCategory" [category]="category" (click)="productCategoryBtnClick(category)" ></app-category-item-card>
+        </div>
+    </div>
+</div>

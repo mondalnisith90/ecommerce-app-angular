@@ -1,0 +1,46 @@
+<div class="root_div" >
+    <div class="main_div card shadow">
+        <h1 class="heading_text" >Signup Form</h1>
+        <hr class="hr_line" />
+        <p style="color: red" >{{serverError}}</p>
+        <form [formGroup]="signupForm" (ngSubmit)="signupFormSubmit()" >
+            <div class="mb-3">
+             <label for="exampleInputUserName" class="form-label">User Name*</label>
+             <input type="text" class="form-control" placeholder="Enter user name" formControlName="username" id="exampleInputUserName" aria-describedby="emailHelp">
+             <div *ngIf="signupForm.controls.username.touched" >
+                <label class="form_error" *ngIf="signupForm.controls.username.errors?.required" >Name field is required</label> 
+                <label class="form_error" *ngIf="signupForm.controls.username.errors?.minlength" >User name min length must be of 3 characters</label> 
+             </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email Address*</label>
+              <input type="email" class="form-control" placeholder="Enter email address"  formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+             <div *ngIf="signupForm.controls.email.touched">
+              <label class="form_error" *ngIf="signupForm.controls.email.errors?.required" >Email field is required</label>
+              <label class="form_error" *ngIf="signupForm.controls.email.errors?.email" >Invalid email address</label>
+            </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password*</label>
+              <input type="password" class="form-control" placeholder="enter password" formControlName="password" id="exampleInputPassword1">
+            <div *ngIf="signupForm.controls.password.touched">
+              <label class="form_error" *ngIf="signupForm.controls.password.errors?.required" >Password field is required</label>
+              <label class="form_error" *ngIf="signupForm.controls.password.errors?.minlength" >Password min length must be of 6 characters</label>
+            </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPhoneNumber" class="form-label">Phone Number*</label>
+              <input type="number" class="form-control" placeholder="Enter phone number" formControlName="mobile" id="exampleInputPhoneNumber" aria-describedby="emailHelp">
+             <div *ngIf="signupForm.controls.mobile.touched">
+              <label class="form_error" *ngIf="signupForm.controls.mobile.errors?.required" >Phone number field is required</label>
+              <label class="form_error" *ngIf="signupForm.controls.mobile.errors?.pattern" >Invalid phone number</label>
+            </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputAddress" class="form-label">Current Address</label>
+              <input type="text" class="form-control" id="exampleInputAddress" formControlName="address" placeholder="Enter your current address" aria-describedby="emailHelp">
+            </div>
+            <button type="submit" [disabled]="signupForm.invalid" class="mt-4" style="height: 43px; font-size: 18px; background-color: #02a349; color: white;" mat-raised-button><mat-icon class="me-2" >person_add</mat-icon>Signup</button>
+          </form>
+    </div>
+</div>
