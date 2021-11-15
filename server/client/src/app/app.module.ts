@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +14,11 @@ import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryItemCardComponent } from './category-item-card/category-item-card.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 
 
 
@@ -27,7 +31,8 @@ import { CategoryItemCardComponent } from './category-item-card/category-item-ca
     SigninComponent,
     HomeComponent,
     AddToCartComponent,
-    CategoryItemCardComponent
+    CategoryItemCardComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,9 @@ import { CategoryItemCardComponent } from './category-item-card/category-item-ca
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

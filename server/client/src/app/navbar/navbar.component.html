@@ -18,10 +18,18 @@
           <li class="nav-item ms-3" *ngIf="loginStatus" >
             <a  (click)="logoutLinkClick()" class="nav-link nav_link" aria-current="page"  routerLink="/logout"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Logout</a>
           </li>
+          <li class="nav-item ms-5" style="width: 500px;">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search items..." aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </li>
         </ul>
+       
         <ul class="navbar-nav  mb-2" >
             <a routerLink="/add-to-cart" ><mat-icon class="add_to_cart_icon" matBadge="5" matBadgeColor="warn">add_shopping_cart</mat-icon></a>
         </ul>
+       
       </div>
     </div>
   </nav>

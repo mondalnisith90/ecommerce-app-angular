@@ -1,0 +1,28 @@
+.product_title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.product_price {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.product_description {
+  font-size: 15px;
+}
+
+.product_card {
+  cursor: pointer;
+}
+
+.product_card:hover {
+  z-index: 1;
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.product_image {
+  width: 100%;
+  height: 280px;
+}

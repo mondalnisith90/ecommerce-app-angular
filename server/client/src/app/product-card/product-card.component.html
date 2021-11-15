@@ -1,0 +1,26 @@
+<mat-card class="example-card product_card">
+  <img mat-card-image [src]="product.imgUrl"  class="p-2 img-fluid product_image"  alt="Photo of a Shiba Inu">
+  <mat-card-content>
+      <div class="d-flex justify-content-between">
+          <div>
+            <p class="product_title" >{{product.name | slice: 0:20}} </p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="me-2" style="color: #093fd6;" (click)="shareProductBtnClick()" matTooltip="Share" >share</mat-icon>
+           </div>
+            <div>
+              <mat-icon aria-hidden="false" *ngIf="!saveProductIconStatus" aria-label="Example home icon" style="color: red;" (click)="wishlistBtnClick()" matTooltip="Add to wishlist" >favorite_border</mat-icon>
+              <mat-icon aria-hidden="false" *ngIf="saveProductIconStatus" aria-label="Example home icon" style="color: red;" (click)="wishlistBtnClick()" matTooltip="Remove from wishlist" >favorite</mat-icon>
+            </div>
+          </div>
+      </div>
+      <p class="product_price" >Price: {{product.price | currency:'INR'}}</p>
+    <p class="product_description"  style="height: 53px;" >{{product.description | slice: 0:100}}...</p>
+    </mat-card-content>
+    <mat-card-actions class="ms-1 mb-1">
+      <button mat-raised-button color="primary" style="font-weight: 800 !important;" (click)="buyProductBtnClick()" >Buy Now</button>
+      <button mat-raised-button color="warn"  (click)="addToCartBtnClick()">Add to cart</button>
+    </mat-card-actions>
+  </mat-card>
+  

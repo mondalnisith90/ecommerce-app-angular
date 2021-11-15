@@ -3,9 +3,6 @@ const { modelName } = require("../models/products_models");
 const router = express.Router();
 const productsModel = require("../models/products_models")
 
-router.get("/", (req, res) => {
-    res.json("Hello Products")
-})
 //create new products
 router.post("/add", async (req, res) => {
     try {
@@ -37,9 +34,9 @@ router.get("/viewall", async(req, res) => {
  }
 });
 //view by catagory
-router.get("/catagory/:catagory", async(req, res) => {
+router.get("/search/category/:category", async(req, res) => {
   try {
-      const catagory=req.params.catagory.trim()
+      const catagory=req.params.category.trim()
       const dbResponse= await productsModel.find({catagory})
       res.status(200).json(dbResponse)
   } catch (error) {
@@ -63,10 +60,9 @@ router.get("/name/:data", async (req, res) => {
 });
 
 //Search by Id and Update
-router.put("/update/:data",async(req,res)=>{
-    console.log("running");
+router.put("/update/:id",async(req,res)=>{
 try {
-    const _id = req.params.data.trim()
+    const _id = req.params.id.trim()
     const dbResponse=await productsModel.findByIdAndUpdate(_id,req.body,{new:true})
     res.status(200).json(dbResponse)
 } catch (error) {

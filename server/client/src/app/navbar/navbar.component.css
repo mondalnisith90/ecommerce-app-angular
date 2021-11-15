@@ -27,16 +27,18 @@
 .navbar-brand {
   font-size: 30px;
   font-weight: 900;
-  color: #aa00ee;
+  color: #e00d8c;
+  font-family: "Oswald", sans-serif;
+  font-style: italic;
 }
 
-/* .navbar-brand:hover {
-  color: #e00263;
-} */
+.navbar-brand:hover {
+  color: #e00d8c;
+}
 
 a.active {
   /* color: #e00263 !important; */
-  border-bottom: 6px solid #02d963;
+  /* border-bottom: 6px solid #02d963; */
   color: #02d963 !important;
   font-weight: 500 !important;
 }

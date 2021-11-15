@@ -11,9 +11,6 @@ app.use(cors({origin: true, credentials: true}));
 app.use("/user",userApi)
 app.use("/products",productsApi)
 
-// app.get("/", (req, res) => {
-//   res.json("Hello Express")
-// });
 
 app.listen(port,()=>{
     console.log("Server running at port no: "+port )

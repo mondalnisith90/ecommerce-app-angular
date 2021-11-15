@@ -24,8 +24,8 @@ export class UserService {
       catchError(this.handelError)
     );
 }
-  private handelError(error: HttpErrorResponse){
-    return throwError(error.error);
-  }
+private handelError(error: HttpErrorResponse){
+  return throwError(error.error);
+}
 
 }
