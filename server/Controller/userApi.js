@@ -41,6 +41,79 @@ router.post("/signin", async (req, res) => {
     }
 });
 
+//Add product to user cart 
+router.put("/add-product/:uid", async (req, res)=>{
+    try {
+        const userId = req.params.uid;
+        const productId = req.body.productId;
+        console.log(userId, productId)
+        const dbResponse = await userModel.findByIdAndUpdate(userId, {$push: {myProducts: productId}}, {new: true});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user id");
+    }
+});
+
+
+//Add product to user cart 
+router.put("/remove-product/:uid", async (req, res)=>{
+    try {
+        const userId = req.params.uid;
+        const productId = req.body.productId;
+        console.log(userId, productId)
+        const dbResponse = await userModel.findByIdAndUpdate(userId, {$pull: {myProducts: productId}}, {new: true});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user id");
+    }
+});
+
+
+//Add product to user cart 
+router.put("/add-to-wishlist/:uid", async (req, res)=>{
+    try {
+        const userId = req.params.uid;
+        const productId = req.body.productId;
+        console.log(userId, productId)
+        const dbResponse = await userModel.findByIdAndUpdate(userId, {$push: {wishlist: productId}}, {new: true});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user id");
+    }
+});
+
+
+//Add product to user cart 
+router.put("/remove-from-wishlist/:uid", async (req, res)=>{
+    try {
+        const userId = req.params.uid;
+        const productId = req.body.productId;
+        console.log(userId, productId)
+        const dbResponse = await userModel.findByIdAndUpdate(userId, {$pull: {wishlist: productId}}, {new: true});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user id");
+    }
+});
+
+
+
 //get profiles by Id
 router.get("/profile/:uId", async (req, res)=>{
     // console.log("running");
@@ -52,7 +125,7 @@ router.get("/profile/:uId", async (req, res)=>{
     } catch (error) {
         res.status(400).json("Can't find user by this Id")
     }
-}),
+});
 
 
 

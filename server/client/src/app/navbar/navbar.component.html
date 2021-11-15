@@ -9,6 +9,9 @@
           <li class="nav-item"  >
             <a class="nav-link nav_link"  aria-current="page" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Home</a>
           </li>
+          <li class="nav-item" *ngIf="loginStatus" >
+            <a class="nav-link nav_link"  aria-current="page" routerLink="/wishlist" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Wishlist</a>
+          </li>
           <li class="nav-item ms-3"  *ngIf="! loginStatus" >
             <a class="nav-link nav_link" aria-current="page" routerLink="/signup"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Signup</a>
           </li>

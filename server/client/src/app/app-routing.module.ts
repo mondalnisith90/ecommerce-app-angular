@@ -4,6 +4,7 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: "signin",
     component: SigninComponent
+  },
+  {
+    path: "wishlist",
+    component: WishlistComponent
   },
   {
     path: "add-to-cart",

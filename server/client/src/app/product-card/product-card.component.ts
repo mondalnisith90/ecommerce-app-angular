@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/Product';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-product-card',
@@ -11,7 +12,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product = {} as Product;
   saveProductIconStatus: boolean = false;
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
   }
@@ -22,9 +23,19 @@ export class ProductCardComponent implements OnInit {
 
   wishlistBtnClick(){
     if(this.saveProductIconStatus){
-      this.saveProductIconStatus = false;
+      this.productService.removeProductFromWishlist("618ce53d86b629dc75ac0a64", this.product._id).subscribe((data)=>{
+        console.log(data);
+        this.saveProductIconStatus = false;
+      }, (error)=>{
+        console.log(error);
+      });
     }else{
-      this.saveProductIconStatus = true;
+      this.productService.addProductToWishlist("618ce53d86b629dc75ac0a64", this.product._id).subscribe((data)=>{
+        console.log(data);
+        this.saveProductIconStatus = true;
+      }, (error)=>{
+        console.log(error);
+      });
     }
 }
 
@@ -34,7 +45,13 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCartBtnClick(){
-    alert("Add to cart product");
+    console.log(this.product._id)
+    this.productService.performAddToCart("618ce53d86b629dc75ac0a64", this.product._id).subscribe((data)=>{
+      console.log(data);
+      alert("Product is added to your cart");
+    }, (error)=>{
+      console.log(error);
+    });
   }
 
 }

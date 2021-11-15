@@ -26,7 +26,14 @@ export class SigninComponent implements OnInit {
     this.userService.userLogin(value).subscribe((data)=>{
       setTimeout(()=>{
         this.router.navigate(['/']);
-        this.applicationDataService.setData(true);
+        const appData = {
+          userId: data._id,
+          username: data.username,
+          myProducts: data.myProducts,
+          wishlist: data.wishlist,
+          isAlreadyLogin: true 
+        }
+        this.applicationDataService.setAppData(appData);
       }, 1000);
     }, (error)=>{
       this.serverError = error;

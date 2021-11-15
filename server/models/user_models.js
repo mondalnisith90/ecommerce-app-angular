@@ -33,6 +33,9 @@ const userSchema =new mongoose.Schema({
     },
     myProducts:{
         type:Array
+    },
+    wishlist: {
+        type: Array
     }
     
 })

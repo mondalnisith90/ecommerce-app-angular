@@ -17,6 +17,7 @@ import { CategoryItemCardComponent } from './category-item-card/category-item-ca
 import { ProductCardComponent } from './product-card/product-card.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 
 
@@ -32,7 +33,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     HomeComponent,
     AddToCartComponent,
     CategoryItemCardComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,

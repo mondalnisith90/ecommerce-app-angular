@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../models/Product';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,28 @@ export class ProductService {
       catchError(this.handelError)
     );
   }
+
+  public performAddToCart(userId: string, productId: string): Observable<User>{
+    const serverUrl = `http://localhost:8002/user/add-product/${userId}`;
+    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+      catchError(this.handelError)
+    );
+  }
+
+  public addProductToWishlist(userId: string, productId: string): Observable<User>{
+    const serverUrl = `http://localhost:8002/user/add-to-wishlist/${userId}`;
+    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+      catchError(this.handelError)
+    );
+  }
+
+  public removeProductFromWishlist(userId: string, productId: string): Observable<User>{
+    const serverUrl = `http://localhost:8002/user/remove-from-wishlist/${userId}`;
+    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+      catchError(this.handelError)
+    );
+  }
+   
 
   private handelError(error: HttpErrorResponse){
     return throwError(error.error);

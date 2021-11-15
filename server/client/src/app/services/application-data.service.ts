@@ -6,16 +6,24 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ApplicationDataService {
 
-  private applicationData = new BehaviorSubject({ isAlreadyLogin: false });
+  private currentUserData = {
+    userId: "",
+    username: "",
+    myProducts: [],
+    wishlist: [],
+    isAlreadyLogin: false 
+  }
+  private applicationData = new BehaviorSubject(this.currentUserData);
 
-  constructor() { }
+  constructor() {   }
 
-  public getData(): Observable<any>{
+  public getAppData(): Observable<any>{
     return this.applicationData;
   }
 
-  public setData(loginStatus: boolean){
-    this.applicationData.next({isAlreadyLogin: loginStatus});
+  public setAppData(data: any){
+    this.currentUserData = {...this.currentUserData, ...data};
+    this.applicationData.next(this.currentUserData);
   }
 
 }

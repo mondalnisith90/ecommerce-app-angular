@@ -15,13 +15,20 @@ export class NavbarComponent implements OnInit {
   constructor(private applicationDataService: ApplicationDataService, private router: Router) { }
 
   ngOnInit(): void {
-    this.applicationDataService.getData().subscribe((data)=>{
+    this.applicationDataService.getAppData().subscribe((data)=>{
+      console.log("Navbar")
+      console.log(data);
       this.loginStatus = data.isAlreadyLogin;
     });
   }
 
   logoutLinkClick(){
-    this.applicationDataService.setData(false);
+    this.applicationDataService.setAppData({  
+    userId: "",
+    username: "",
+    myProducts: [],
+    wishlist: [],
+    isAlreadyLogin: false});
     this.router.navigate(['/signin']);
   }
 
