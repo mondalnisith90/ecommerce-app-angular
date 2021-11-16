@@ -1,0 +1,27 @@
+.root_div {
+  margin-top: 110px;
+  /* width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.oops_text {
+  color: #c40233;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.des_text {
+  font-size: 16px;
+  text-align: center;
+  color: #09a8ba;
+}
+
+.shop_now_btn {
+  width: 150px;
+  height: 45px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+}

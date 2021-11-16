@@ -18,6 +18,9 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { AddToCartCardItemComponent } from './add-to-cart-card-item/add-to-cart-card-item.component';
+
 
 
 
@@ -34,7 +37,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     AddToCartComponent,
     CategoryItemCardComponent,
     ProductCardComponent,
-    WishlistComponent
+    WishlistComponent,
+    AddToCartCardItemComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     FormsModule,
     HttpClientModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -30,7 +30,7 @@
         </ul>
        
         <ul class="navbar-nav  mb-2" >
-            <a routerLink="/add-to-cart" ><mat-icon class="add_to_cart_icon" matBadge="5" matBadgeColor="warn">add_shopping_cart</mat-icon></a>
+            <a routerLink="/add-to-cart" ><mat-icon class="add_to_cart_icon" [matBadge]="totalCartItems" matBadgeColor="warn">add_shopping_cart</mat-icon></a>
         </ul>
        
       </div>

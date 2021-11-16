@@ -42,9 +42,22 @@ router.get("/search/category/:category", async(req, res) => {
   } catch (error) {
       res.status(400).json("No Item found in this catagory")
   }
-
-
 });
+
+//get product by id
+router.get("/search/:pid", async(req, res) => {
+    try {
+        const productId=req.params.pid;
+        const dbResponse= await productsModel.findOne({_id: productId});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Inavlid product id.")
+    }
+  });
 
 
 // search by name

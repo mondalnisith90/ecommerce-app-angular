@@ -21,6 +21,8 @@ export class ApplicationDataService {
     return this.applicationData;
   }
 
+
+
   public setAppData(data: any){
     this.currentUserData = {...this.currentUserData, ...data};
     this.applicationData.next(this.currentUserData);
