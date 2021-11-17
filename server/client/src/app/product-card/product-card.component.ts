@@ -51,6 +51,9 @@ export class ProductCardComponent implements OnInit {
       this.productService.removeProductFromWishlist(this.currentUserData.userId, this.product._id).subscribe((data)=>{
         console.log(data);
         this.saveProductIconStatus = false;
+        if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
+          this.applicationDataService.setAppData({wishlist: data.wishlist});
+        }
       }, (error)=>{
         console.log(error);
       });
@@ -62,6 +65,9 @@ export class ProductCardComponent implements OnInit {
       this.productService.addProductToWishlist(this.currentUserData.userId, this.product._id).subscribe((data)=>{
         console.log(data);
         this.saveProductIconStatus = true;
+        if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
+          this.applicationDataService.setAppData({wishlist: data.wishlist});
+        }
       }, (error)=>{
         console.log(error);
       });

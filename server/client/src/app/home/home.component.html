@@ -5,9 +5,11 @@
         </div>
         <div class="body_div row g-3">
           <div *ngFor="let product of products"  class="col-lg-3 col-md-3 col-sm-2 col-12 p-2">
-            <app-product-card  [product]="product" ></app-product-card>
+            <app-product-card  [product]="product"  ></app-product-card>
           </div>  
+          <div>
+            <h1 class="home_empty_product_text" *ngIf="products.length==0" >Oops! This product category is currently unavailable...</h1>
+          </div>
         </div>
     </div>
- 
 </div>

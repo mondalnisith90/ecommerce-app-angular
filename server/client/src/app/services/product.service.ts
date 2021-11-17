@@ -58,6 +58,12 @@ export class ProductService {
     );
   }
 
+
+  // public getProductWishlist(userId: string): Observable<Array[string]>{
+  //   const serverUrl = `${this.baseUrl}`;
+  //   return this.httpClient.get(serverUrl, )
+  // }
+
   public performAddToCart(userId: string, productId: string): Observable<User>{
     const serverUrl = `http://localhost:8002/user/add-product/${userId}`;
     return this.httpClient.put<User>(serverUrl, {productId}).pipe(

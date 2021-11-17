@@ -1,1 +1,33 @@
-<p>wishlist works!</p>
+<div class="root_div">
+    <!-- display when wishlist is empty -->
+    <div  class="empty_wish_div container" *ngIf="getWishlistLength()==0">
+        <div class="row">
+            <mat-card>
+                <div style="text-align: center;">
+                    <img class="img-fluid" style="width: 620px; height: 330px;" alt="empty_image" src="https://cobblersmagic.com/images/empty-cart.png" />
+                </div>
+                <div class="  d-flex justify-content-center align-items-center flex-column" >
+                    <div>
+                        <h1 class="oops_text">Oops! Your wishlist is empty</h1>
+                    </div>
+                    <div class="text-center" style="width: 210px;" >
+                        <h4 class="des_text">Looks like you haven't added anything to your wishlist yet</h4>
+                        <a class="btn btn-primary shop_now_btn" routerLink="/">Shop Now</a>
+                    </div>
+                    
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <!-- display when some products are present inside cart -->
+
+    <!-- <div class="cart_products_main_div container">
+            <mat-card *ngIf="getCartProductCount()>0">
+                <div class="cartitem_div">
+                    <app-add-to-cart-card-item *ngFor="let productId of getAllCartProducts()" [productId]="productId" ></app-add-to-cart-card-item>
+                </div>
+            </mat-card>
+    </div> -->
+
+
+</div>
