@@ -1,10 +1,19 @@
 .root_div {
-  margin-top: 110px;
+  margin-top: 100px;
   /* width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center; */
+}
+
+.header_text {
+  color: #059e3d;
+  font-size: 28px;
+  font-family: "Oswald", sans-serif;
+  padding: 30px;
+  text-align: center;
+  font-weight: 900;
 }
 
 .oops_text {

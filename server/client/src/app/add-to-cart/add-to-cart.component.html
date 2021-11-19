@@ -22,6 +22,7 @@
     <!-- display when some products are present inside cart -->
 
     <div class="cart_products_main_div container">
+        <mat-card *ngIf="getCartProductCount()!=0" class="container mb-2 mt-0 header_text"  >My Cart Items</mat-card>
             <mat-card *ngIf="getCartProductCount()>0">
                 <div class="cartitem_div">
                     <app-add-to-cart-card-item *ngFor="let productId of getAllCartProducts()" [productId]="productId" ></app-add-to-cart-card-item>

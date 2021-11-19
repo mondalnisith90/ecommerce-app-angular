@@ -5,14 +5,12 @@ import { Component, DoCheck, Input, OnInit } from '@angular/core';
   templateUrl: './category-item-card.component.html',
   styleUrls: ['./category-item-card.component.css']
 })
-export class CategoryItemCardComponent implements OnInit, DoCheck {
+export class CategoryItemCardComponent implements OnInit {
 
   @Input() category: any
 
   constructor() { }
-  ngDoCheck(): void {
-    console.log("ngDoCheck() is called.");
-  }
+ 
 
   ngOnInit(): void {
   }

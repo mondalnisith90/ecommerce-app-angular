@@ -13,8 +13,8 @@ export class SigninComponent implements OnInit {
   serverError: string = "";
 
   signupForm = {
-    email: "",
-    password: ""
+    email: "nisith@gmail.com",
+    password: "123456"
   }
 
   constructor(private userService: UserService, private router: Router, private applicationDataService: ApplicationDataService) { }

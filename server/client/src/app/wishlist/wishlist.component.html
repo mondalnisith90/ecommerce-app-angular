@@ -19,15 +19,15 @@
             </mat-card>
         </div>
     </div>
-    <!-- display when some products are present inside cart -->
+    <!-- display when some products are present inside wishlist -->
 
-    <!-- <div class="cart_products_main_div container">
-            <mat-card *ngIf="getCartProductCount()>0">
+    <div class="cart_products_main_div container">
+            <mat-card *ngIf="getWishlistLength()>0" >
                 <div class="cartitem_div">
-                    <app-add-to-cart-card-item *ngFor="let productId of getAllCartProducts()" [productId]="productId" ></app-add-to-cart-card-item>
+                    <app-wish-list-card *ngFor="let productId of getAllWishlistItems()" [productId]="productId"  ></app-wish-list-card>
                 </div>
             </mat-card>
-    </div> -->
+    </div>
 
 
 </div>

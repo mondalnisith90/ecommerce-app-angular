@@ -70,6 +70,13 @@ export class ProductService {
       catchError(this.handelError)
     );
   }
+  
+  public removeProductFromCart(userId: string, productId: string): Observable<User> {
+    const serverUrl = `http://localhost:8002/user/remove-product/${userId}`;
+    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+      catchError(this.handelError)
+    );
+  }
 
   public addProductToWishlist(userId: string, productId: string): Observable<User>{
     const serverUrl = `http://localhost:8002/user/add-to-wishlist/${userId}`;

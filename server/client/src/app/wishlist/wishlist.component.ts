@@ -14,8 +14,8 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.applicationDataService.getAppData().subscribe((appData)=>{
-      console.log("User wishlist...");
-      console.log(appData);
+      // console.log("User wishlist...");
+      // console.log(appData);
       if(appData.userId && appData.isAlreadyLogin){
         this.userWishlist = appData.wishlist;
       }else{
@@ -29,6 +29,11 @@ export class WishlistComponent implements OnInit {
 
   getWishlistLength(): Number{
     return this.userWishlist.length;
+  }
+
+
+  getAllWishlistItems(): Array<string>{
+    return this.userWishlist;
   }
 
 }
