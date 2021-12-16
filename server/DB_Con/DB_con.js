@@ -1,5 +1,6 @@
 const mongoose=require("mongoose")
-const DBUrl = `mongodb+srv://rajdip:9842@cluster0.t5r5k.mongodb.net/ecomDB?retryWrites=true&w=majority`
+// const DBUrl = `mongodb+srv://rajdip:9842@cluster0.t5r5k.mongodb.net/ecomDB?retryWrites=true&w=majority`
+const DBUrl = `mongodb://localhost:27017/ecomDB`;
 
 mongoose.connect(DBUrl, {
     useNewUrlParser: true,

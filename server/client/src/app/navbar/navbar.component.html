@@ -7,19 +7,20 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto ms-3 mb-2 mb-lg-0">
           <li class="nav-item"  >
-            <a class="nav-link nav_link"  aria-current="page" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Home</a>
+            <!-- [routerLinkActiveOptions]="{exact: true}" -->
+            <a class="nav-link nav_link"  aria-current="page" routerLink="/home" routerLinkActive="active"  >Home</a>
           </li>
           <li class="nav-item" *ngIf="loginStatus" >
-            <a class="nav-link nav_link"  aria-current="page" routerLink="/wishlist" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Wishlist</a>
+            <a class="nav-link nav_link"  aria-current="page" routerLink="/wishlist" routerLinkActive="active"  >Wishlist</a>
           </li>
           <li class="nav-item ms-3"  *ngIf="! loginStatus" >
-            <a class="nav-link nav_link" aria-current="page" routerLink="/signup"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Signup</a>
+            <a class="nav-link nav_link" aria-current="page" routerLink="/signup"  routerLinkActive="active"  >Signup</a>
           </li>
           <li class="nav-item ms-3"  *ngIf="! loginStatus" >
-            <a class="nav-link nav_link" aria-current="page" routerLink="/signin"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Login</a>
+            <a class="nav-link nav_link" aria-current="page" routerLink="/signin"  routerLinkActive="active"  >Login</a>
           </li>
           <li class="nav-item ms-3" *ngIf="loginStatus" >
-            <a  (click)="logoutLinkClick()" class="nav-link nav_link" aria-current="page"  routerLink="/logout"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Logout</a>
+            <a  (click)="logoutLinkClick()" class="nav-link nav_link" aria-current="page"  routerLink="/logout"  routerLinkActive="active"  >Logout</a>
           </li>
           <li class="nav-item ms-5" style="width: 500px;">
             <form class="d-flex">

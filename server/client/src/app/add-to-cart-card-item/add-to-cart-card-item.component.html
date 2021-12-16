@@ -11,7 +11,7 @@
                    <h3 class="item_count_text pt-2">{{totalProductCount}} pics</h3>
                </div>
                <div>
-               <P class="product_price  p-2">{{cartProductItem.price | currency:'INR'}}</P>
+               <P class="product_price  p-2">{{cartProductItem.price * totalProductCount | currency:'INR'}}</P>
             </div>
            </div> 
            <div class="product_description">

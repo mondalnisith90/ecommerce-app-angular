@@ -25,7 +25,7 @@
         <mat-card *ngIf="getCartProductCount()!=0" class="container mb-2 mt-0 header_text"  >My Cart Items</mat-card>
             <mat-card *ngIf="getCartProductCount()>0">
                 <div class="cartitem_div">
-                    <app-add-to-cart-card-item *ngFor="let productId of getAllCartProducts()" [productId]="productId" ></app-add-to-cart-card-item>
+                    <app-add-to-cart-card-item *ngFor="let product of cartProducts" [product]="product" ></app-add-to-cart-card-item>
                 </div>
             </mat-card>
     </div>

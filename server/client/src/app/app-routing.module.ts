@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { CustomerComponent } from './customer/customer.component';
 import { HomeComponent } from './home/home.component';
+import { SellerComponent } from './seller/seller.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
@@ -9,7 +11,22 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 const routes: Routes = [
   {
     path: "",
-    component: HomeComponent
+    redirectTo: "home",
+    pathMatch: "full"
+  },
+  {
+    path: "home",
+    component: HomeComponent,
+    children: [
+      {
+        path: "customer",
+        component: CustomerComponent
+      },
+      {
+        path: "seller",
+        component: SellerComponent
+      }
+    ]
   },
   {
     path: "signup",
@@ -17,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: "signin",
-    component: SigninComponent
+    component: SigninComponent,
   },
   {
     path: "wishlist",

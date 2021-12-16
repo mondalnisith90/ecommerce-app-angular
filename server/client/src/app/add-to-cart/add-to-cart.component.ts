@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductCart } from '../models/productCart';
 import { ApplicationDataService } from '../services/application-data.service';
 
 @Component({
@@ -9,12 +10,17 @@ import { ApplicationDataService } from '../services/application-data.service';
 export class AddToCartComponent implements OnInit {
 
   private appliactionData: any = null;
+  cartProducts: Array<ProductCart> = [];
+
 
   constructor(private applicationDataService: ApplicationDataService) { }
 
   ngOnInit(): void {
     this.applicationDataService.getAppData().subscribe((data)=>{
       this.appliactionData = data;
+      console.log("ngOnInit() data is called application data is changed..");
+      console.log(data)
+      this.getAllCartProducts();
     }, (error)=>{
 
     });
@@ -22,13 +28,29 @@ export class AddToCartComponent implements OnInit {
 
   public getCartProductCount(): number{
     if(this.appliactionData){
-      return this.appliactionData.myProducts.length;
+      // return this.appliactionData.myProducts.length;
+      return this.cartProducts.length;
     }
     return 0;
   }
 
-  public getAllCartProducts(): Array<string>{
-    return this.appliactionData.myProducts;
+  public getAllCartProducts(): Array<ProductCart>{
+    const myProducts = this.appliactionData.myProducts;
+    const productsIdSet = new Set(myProducts);
+    this.cartProducts = [];
+    productsIdSet.forEach((productId: any)=>{
+      let idFrequency = 0;
+      myProducts.forEach((id: string)=>{
+        if(id===productId){
+          idFrequency++;
+        }
+      });
+      this.cartProducts.push({
+        productId: productId,
+        frequency: idFrequency
+      });
+    });
+    return this.cartProducts;
   }
 
 }

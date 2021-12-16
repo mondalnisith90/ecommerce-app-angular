@@ -21,6 +21,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { AddToCartCardItemComponent } from './add-to-cart-card-item/add-to-cart-card-item.component';
 import { WishListCardComponent } from './wish-list-card/wish-list-card.component';
+import { CustomerComponent } from './customer/customer.component';
+import { SellerComponent } from './seller/seller.component';
 
 
 
@@ -40,7 +42,9 @@ import { WishListCardComponent } from './wish-list-card/wish-list-card.component
     ProductCardComponent,
     WishlistComponent,
     AddToCartCardItemComponent,
-    WishListCardComponent
+    WishListCardComponent,
+    CustomerComponent,
+    SellerComponent
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,8 @@ router.get("/viewall", async(req, res) => {
  try {
      const dbResponse = await productsModel.find();
      res.status(200).json(dbResponse)
+     const userToken = req.cookies.mycookiedata;
+     console.log(userToken);
      
  } catch (error) {
      console.log("No data found")

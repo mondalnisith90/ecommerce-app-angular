@@ -40,6 +40,7 @@ export class ProductService {
   }
 
   public getProductById(productId: string): Observable<Product>{
+    // console.log("getProductById() is called...")
     const serverUrl = `${this.baseUrl}search/${productId}`;
     return this.httpClient.get<Product>(serverUrl).pipe(
       catchError(this.handelError)
@@ -53,7 +54,7 @@ export class ProductService {
     }else{
        serverUrl = this.baseUrl + "viewall";
     }
-    return this.httpClient.get<Product[]>(serverUrl).pipe(
+    return this.httpClient.get<Product[]>(serverUrl, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
