@@ -24,6 +24,28 @@ export class UserService {
       catchError(this.handelError)
     );
 }
+
+public placeUserOrder(userId: any, orderDetails: any): Observable<any>{
+  const serverUrl = `${this.baseUrl}order/${userId}`;
+  return this.httpClient.put(serverUrl, orderDetails, {withCredentials: true}).pipe(
+    catchError(this.handelError)
+  );
+}
+
+public getCurrentUserAllOrders(userId: string): Observable<any> {
+  const serverUrl = `${this.baseUrl}my-orders/${userId}`;
+  return this.httpClient.get(serverUrl).pipe(
+    catchError(this.handelError)
+  );
+}
+
+public updateUserProductDeliveryStatus(userId: string, delivaryStatus: string, documentId: string): Observable<any>{
+  const serverUrl = `${this.baseUrl}update-delivary-status/${userId}`;
+  return this.httpClient.put(serverUrl, {documentId, delivaryStatus}, {withCredentials: true}).pipe(
+    catchError(this.handelError)
+  );
+}
+
 private handelError(error: HttpErrorResponse){
   return throwError(error.error);
 }

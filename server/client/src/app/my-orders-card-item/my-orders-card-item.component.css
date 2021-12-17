@@ -1,0 +1,27 @@
+.product_title {
+  font-size: 23px;
+  font-weight: 500;
+  color: black;
+}
+
+.product_price {
+  font-size: 18px;
+  color: red;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.product_description {
+  margin-top: 0px;
+}
+
+.cart_button {
+  width: 100px;
+  height: 42px;
+}
+
+.item_count_text {
+  font-size: 18px;
+  font-weight: 500;
+  color: green;
+}

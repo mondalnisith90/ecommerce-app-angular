@@ -9,9 +9,10 @@ export class ApplicationDataService {
   private currentUserData = {
     userId: "",
     username: "",
-    myProducts: [],
+    cartItems: [],
     wishlist: [],
-    isAlreadyLogin: false 
+    isAlreadyLogin: false,
+    userType: "user" //This field value will be either user or admin 
   }
   private applicationData = new BehaviorSubject(this.currentUserData);
 

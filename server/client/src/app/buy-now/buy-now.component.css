@@ -1,0 +1,76 @@
+.root_div {
+  height: 100vh;
+}
+
+.header_div {
+  margin-top: 100px;
+}
+
+.header_text {
+  color: #059e3d;
+  font-size: 28px;
+  font-family: "Oswald", sans-serif;
+  padding: 30px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.item_count_text {
+  color: #1a1b1b;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.product_price {
+  color: #181a19;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.body_div {
+  margin-top: 20px;
+}
+
+.total_price {
+  font-size: 17px;
+  font-weight: 400;
+  margin-top: 10px;
+  color: red;
+}
+
+.error_text {
+  font-size: 20px;
+  font-weight: 800;
+  color: red;
+  text-align: center;
+}
+
+label {
+  font-weight: 500;
+  color: rgb(20, 19, 19);
+  font-size: 16px;
+}
+
+span {
+  font-weight: 700;
+  color: red;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.delivery_details {
+  font-weight: 600;
+  color: rgb(31, 29, 29);
+}
+
+.pament_option {
+  color: green;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.delivery_info_text {
+  /* color: rgb(20, 19, 19);
+  font-size: 15px;
+  margin-left: 15px; */
+}

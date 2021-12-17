@@ -18,9 +18,11 @@
       <p class="product_price" >Price: {{product.price | currency:'INR'}}</p>
     <p class="product_description"  style="height: 53px;" >{{product.description | slice: 0:100}}...</p>
     </mat-card-content>
+    <a [routerLink]="productDetailsUrl">View Details</a>
     <mat-card-actions class="ms-1 mb-1">
-      <button mat-raised-button color="primary" style="font-weight: 800 !important;" (click)="buyProductBtnClick()" >Buy Now</button>
-      <button mat-raised-button color="warn"  (click)="addToCartBtnClick()">Add to cart</button>
+      <!-- <button mat-raised-button color="primary" style="font-weight: 800 !important;" (click)="buyProductBtnClick(product._id)" >Buy Now</button> -->
+      <button class="btn btn-primary btn-sm"  (click)="buyProductBtnClick(product._id)" >Buy Now</button>
+      <!-- <button mat-raised-button color="warn"  (click)="addToCartBtnClick()">{{addToCartButtonCaption}}</button> -->
+      <button class="btn btn-danger btn-sm ms-2"  (click)="addToCartBtnClick()">{{addToCartButtonCaption}}</button>
     </mat-card-actions>
   </mat-card>
-  

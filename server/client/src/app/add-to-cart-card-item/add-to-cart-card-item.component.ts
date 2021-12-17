@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../models/Product';
 import { ProductCart } from '../models/productCart';
 import { ApplicationDataService } from '../services/application-data.service';
@@ -11,33 +12,24 @@ import { ProductService } from '../services/product.service';
 })
 export class AddToCartCardItemComponent implements OnInit {
 
-  @Input() product: ProductCart = {} as ProductCart;
+  @Input() cartProduct: any = {};
   cartProductItem: Product = {} as Product;
   applicationData: any = {};
   totalProductCount = 1;
   
   
 
-  constructor(private productService: ProductService, private applicationDataService: ApplicationDataService) {
-   }
-
+  constructor(private productService: ProductService, private applicationDataService: ApplicationDataService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log("ngOnInit() is called...");
-    this.totalProductCount = this.product.frequency;
-    console.log(this.product)
-    this.productService.getProductById(this.product.productId).subscribe((product)=>{
-      // console.log("Add to cart....")
-      // console.log(product);
+    this.totalProductCount = this.cartProduct.quentity;
+    this.productService.getProductById(this.cartProduct.productId).subscribe((product)=>{
       this.cartProductItem = product;
     }, (error)=>{
-      // console.log("Add to cart....")
       console.log(error);
     });
 
     this.applicationDataService.getAppData().subscribe((data)=>{
-      // console.log("Cart items data.....")
-      // console.log(data);
       this.applicationData = data;
     }, (error)=>{
       console.log(error);
@@ -45,12 +37,22 @@ export class AddToCartCardItemComponent implements OnInit {
   }
 
   incrementCartCountBtnClick(){
-    this.totalProductCount++;
+    this.productService.changecartproductQuentity(this.applicationData.userId, this.cartProduct.productId, this.totalProductCount+1).subscribe((data)=>{
+      this.totalProductCount++;
+      this.applicationDataService.setAppData({
+        cartItems: data.cartItems
+      });
+    });
   }
 
   decreaseCartCountBtnClick(){
     if(this.totalProductCount>1){
-      this.totalProductCount--;
+      this.productService.changecartproductQuentity(this.applicationData.userId, this.cartProduct.productId, this.totalProductCount-1).subscribe((data)=>{
+        this.totalProductCount--;
+        this.applicationDataService.setAppData({
+          cartItems: data.cartItems
+        });
+      });
     }
   }
 
@@ -58,13 +60,15 @@ export class AddToCartCardItemComponent implements OnInit {
     if(this.applicationData && this.applicationData.userId && this.applicationData.isAlreadyLogin){
       //remove cart item
       this.productService.removeProductFromCart(this.applicationData.userId, productId).subscribe((data)=>{
-        console.log("Add To Cart ppppp........ product remove successfully...");
-        console.log(data.myProducts);
-        this.applicationDataService.setAppData({myProducts: data.myProducts});
+        this.applicationDataService.setAppData({cartItems: data.cartItems});
       }, (error)=>{
         alert("Product not remove from cart "+error);
       });
     }
+  }
+
+  buyNowBtnClick(productId: string){
+    this.router.navigate(['/buy-now'], {queryParams: {productId: productId, quantity: this.totalProductCount}});
   }
 
 }

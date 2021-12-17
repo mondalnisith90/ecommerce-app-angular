@@ -65,28 +65,35 @@ export class ProductService {
   //   return this.httpClient.get(serverUrl, )
   // }
 
-  public performAddToCart(userId: string, productId: string): Observable<User>{
-    const serverUrl = `http://localhost:8002/user/add-product/${userId}`;
-    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+  public performAddToCart(userId: string, productId: string): Observable<any>{
+    const serverUrl = `http://localhost:8002/user/add-to-cart/${userId}`;
+    return this.httpClient.put<User>(serverUrl, {productId, quentity: 1}).pipe(
+      catchError(this.handelError)
+    );
+  }
+
+  public changecartproductQuentity(userId: string, productId: string, quentity: number): Observable<any>{
+    const serverUrl = `http://localhost:8002/user/add-to-cart-change-quentity/${userId}`;
+    return this.httpClient.put(serverUrl, {productId, quentity}).pipe(
       catchError(this.handelError)
     );
   }
   
-  public removeProductFromCart(userId: string, productId: string): Observable<User> {
-    const serverUrl = `http://localhost:8002/user/remove-product/${userId}`;
+  public removeProductFromCart(userId: string, productId: string): Observable<any> {
+    const serverUrl = `http://localhost:8002/user/remove-from-cart/${userId}`;
     return this.httpClient.put<User>(serverUrl, {productId}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public addProductToWishlist(userId: string, productId: string): Observable<User>{
+  public addProductToWishlist(userId: string, productId: string): Observable<any>{
     const serverUrl = `http://localhost:8002/user/add-to-wishlist/${userId}`;
     return this.httpClient.put<User>(serverUrl, {productId}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public removeProductFromWishlist(userId: string, productId: string): Observable<User>{
+  public removeProductFromWishlist(userId: string, productId: string): Observable<any>{
     const serverUrl = `http://localhost:8002/user/remove-from-wishlist/${userId}`;
     return this.httpClient.put<User>(serverUrl, {productId}).pipe(
       catchError(this.handelError)

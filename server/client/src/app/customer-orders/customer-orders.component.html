@@ -1,0 +1,14 @@
+<section class="root_div">
+    <div class="header_div container">
+        <mat-card  class="container mb-2 mt-0 header_text"  >Customer Orders</mat-card>
+    </div>
+    <div class="body_div container">
+        <div class="row">
+            <div class="col-md-12" *ngFor="let customerOrder of allCustomerOrders">
+                <mat-card class="mb-2">
+                <app-customer-orders-card-item  [customerOrder]="customerOrder" ></app-customer-orders-card-item>
+               </mat-card>
+            </div>
+        </div>
+    </div>
+</section>

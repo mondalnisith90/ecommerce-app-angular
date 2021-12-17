@@ -22,7 +22,7 @@ export class WishlistComponent implements OnInit {
         this.userWishlist = [];
       }
     }, (error)=>{
-      console.log("User product wishlist error", error);
+      // console.log("User product wishlist error", error);
       this.userWishlist = [];
     });
   }

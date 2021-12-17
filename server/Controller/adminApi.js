@@ -33,7 +33,7 @@ router.post("/signin", async (req, res)=>{
         if(!email || !password){
             res.status(422).json("Please fill input fields properly.");
         }else{
-            const dbResponse = await adminModel.findOne({email, password});
+            const dbResponse = await adminModel.findOne({email, password}, {customerOders: 0, password: 0, email: 0});
             if(dbResponse){
                 res.status(200).json(dbResponse);
             }else{
@@ -45,12 +45,26 @@ router.post("/signin", async (req, res)=>{
     }
 });
 
+router.get("/all-customer-orders/:uid", async (req, res)=>{
+    const userId = req.params.uid;
+    try {
+        const dbResponse = await adminModel.findById(userId, {email: 0, password: 0, userType: 0, userName: 0});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user id");
+    }
+});
+
 
 router.put("/add-customer-order/:uid", async (req, res)=>{
     const adminId = req.params.uid;
-    const {customerId, productId, price, quentity, delivaryAddress, pincode, contactNumber} = req.body;
+    const {customerId, productId, customerOrderId, price, quentity, delivaryAddress, pincode, contactNumber} = req.body;
     try {
-        if(!customerId ||  !productId ||  !price ||  !quentity ||  !delivaryAddress || !pincode || !contactNumber){
+        if(!customerId ||  !productId ||  !customerOrderId || !price ||  !quentity ||  !delivaryAddress || !pincode || !contactNumber){
             // console.log(req.body);
             res.status(422).json("Please fill input fields properly.");
         }else{
@@ -64,6 +78,42 @@ router.put("/add-customer-order/:uid", async (req, res)=>{
     } catch (error) {
         res.status(400).json("Add customer order failed. "+error.message);
     }
+});
+
+//Change customer delivery status
+router.put("/update-delivary-status/:adminId", async (req, res)=>{
+    const adminId = req.params.adminId;
+    const {customerOrderId, delivaryStatus} = req.body;
+    try {
+        if(! delivaryStatus){
+            res.status(422).json("Please fill input field properly.");
+        }else{
+            const dbResponse = await adminModel.findOneAndUpdate({_id: adminId, "customerOders.customerOrderId": customerOrderId}, {$set: {"customerOders.$.delivaryStatus": delivaryStatus}}, {new: true});
+            if(dbResponse){
+                res.status(200).json(dbResponse);
+            }else{
+                throw new Error();
+            }
+        }
+    } catch (error) {
+        res.status(400).json("Invalid User Id "+error.message);
+    }
+});
+
+//Get all customer orders
+router.get("/customer-orders/:adminId", async (req, res)=>{
+    const adminId = req.params.adminId;
+    try {
+        const dbResponse = await adminModel.findById(adminId, {userName: 0, email: 0, password: 0});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user");
+    }
+
 });
 
 router.get("/profile/:uid", async (req, res)=>{

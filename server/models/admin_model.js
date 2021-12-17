@@ -6,6 +6,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userType: {
+        type: String,
+        default: "admin"
+    },
     email: {
         unique:[true,"This email is already registered with us"],
         type:String,
@@ -29,6 +33,9 @@ const adminSchema = new mongoose.Schema({
             productId: {
                 type: String
             },
+            customerOrderId: {
+                type: String
+            },
             price: {
                 type: Number
             },
@@ -46,8 +53,8 @@ const adminSchema = new mongoose.Schema({
             },
             delivaryStatus: {
                 //If the product is already deliver then this field value will be true
-                type: Boolean,
-                default: false
+                type: String,
+                default: "pending" //It's value will be either pending, successfull, cancel.
             },
             timeStamp: {
                 type: Date,

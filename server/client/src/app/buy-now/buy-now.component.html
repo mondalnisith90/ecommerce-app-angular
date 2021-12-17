@@ -1,0 +1,147 @@
+<section class="root_div">
+    <div class="header_div container">
+        <mat-card  class="container mb-2 mt-0 header_text"  >Buy Your favourite Product in Very Low Price</mat-card>
+    </div>
+    <div class="body_div container">
+        <mat-card *ngIf="!serverErrorStatus">
+            <div class="row mt-2 ">
+                <div class=" col-md-3 text-center ">
+                    <img class="img-fluid" style="width: 100%; height: 200px; object-fit:contain;" [src]="productDetails.imgUrl" alt="cart image" />
+                </div> 
+                <div class="col-md-9">
+                       <div class=" d-flex justify-content-between ">
+                          <div>
+                            <h2 class="product_title pt-2">{{productDetails.name}}</h2>
+                           </div>
+                           <div>
+                               <h3 class="item_count_text pt-2">Quantity: {{productQuantity}}</h3>
+                           </div>
+                           <div>
+                           <!-- <P class="product_price  p-2">{{productDetails.price * productQuantity | currency:'INR'}}</P> -->
+                           <P class="product_price  p-2">Price: {{productDetails.price | currency: "INR"}}/pic</P>
+                        </div>
+                       </div> 
+                       <div class="product_description">
+                           {{productDetails.description}}
+                       </div>
+                       <div>
+                        <P class="total_price">Total Price: {{productDetails.price*productQuantity | currency: "INR"}}</P>
+                       </div>
+                       <div>
+                        <P class="" style="color: black; font-size: 15px; font-weight: 400;">Delivery Date: Within 3 Days</P>
+                       </div>
+                       <div>
+                        <P class="pament_option">Pament Option: Cash On Delivery Only Available</P>
+                       </div>
+                       <div class="footer mt-4">
+                        <button mat-raised-button color="primary" class="cart_button" ><mat-icon class="me-1" (click)="decreaseItemCountBtnClick()">remove_circle</mat-icon> {{productQuantity}} <mat-icon class="ms-1"  (click)="incrementItemCountBtnClick()">add_circle</mat-icon></button>
+                       </div>
+                  </div>
+               </div>  
+        </mat-card>
+          
+        <mat-card *ngIf="serverErrorStatus">
+            <h1 class="error_text">Invalid product Id</h1>
+        </mat-card>
+
+        <mat-card class="mb-5" *ngIf="! serverErrorStatus">
+            <h2 class="delivery_details">Product Delivery Details</h2>
+            <div class="mt-1 p-2">
+                <form class="w-100" [formGroup]="deliveryAddressForm" (ngSubmit)="deliveryAddressFormSubmit()" >
+                    <div class="mb-3">
+                        <label for="exampleInputAddress" class="form-label">Product Delivery Address*</label>
+                        <input type="text" class="form-control" id="exampleInputAddress" formControlName="delivaryAddress" placeholder="Enter product decivary address" aria-describedby="emailHelp">
+                        <div *ngIf="deliveryAddressForm.controls.delivaryAddress.touched">
+                          <span *ngIf="deliveryAddressForm.controls.delivaryAddress.errors?.required">Address field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                     <label for="exampleInputUserName" class="form-label">Pincode*</label>
+                     <input type="number" class="form-control" placeholder="Enter pincode" formControlName="pincode" id="exampleInputUserName" aria-describedby="emailHelp">
+                     <div *ngIf="deliveryAddressForm.controls.pincode.touched" >
+                        <span class="form_error" *ngIf="deliveryAddressForm.controls.pincode.errors?.required" >Pincode field is required</span> 
+                        <span class="form_error" *ngIf="deliveryAddressForm.controls.pincode.errors?.pattern" >Please enter a valid pincode</span> 
+                     </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputPhoneNumber" class="form-label">Phone Number*</label>
+                      <input type="number" class="form-control" placeholder="Enter phone number" formControlName="contactNumber" id="exampleInputPhoneNumber" aria-describedby="emailHelp">
+                     <div *ngIf="deliveryAddressForm.controls.contactNumber.touched">
+                      <span class="form_error" *ngIf="deliveryAddressForm.controls.contactNumber.errors?.required" >Phone number field is required</span>
+                      <span class="form_error" *ngIf="deliveryAddressForm.controls.contactNumber.errors?.pattern" >Invalid phone number</span>
+                    </div>
+                    </div>
+                    <button type="submit" [disabled]="deliveryAddressForm.invalid" data-bs-toggle="modal" data-bs-target="#exampleModal"  class="btn btn-primary">Order Now</button>
+
+
+                  </form>
+            </div>
+        </mat-card>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Order Preview</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <mat-card>
+          <div class="row mt-2 ">
+            <div class=" col-md-3 text-center ">
+                <img class="img-fluid" style="width: 100%; height: 200px; object-fit:contain;" [src]="productDetails.imgUrl" alt="cart image" />
+            </div> 
+            <div class="col-md-9">
+                   <div class=" d-flex justify-content-between ">
+                      <div>
+                        <h2 class="product_title pt-2">{{productDetails.name | slice: 0:20}}</h2>
+                       </div>
+                       <div>
+                           <h2 class="item_count_text pt-2">Quantity: {{productQuantity}}</h2>
+                       </div>
+                       <div>
+                       <!-- <P class="product_price  p-2">{{productDetails.price * productQuantity | currency:'INR'}}</P> -->
+                       <h2 class="product_price  p-2">Price: {{productDetails.price | currency: "INR"}}/pic</h2>
+                    </div>
+                   </div> 
+                   <div class="product_description">
+                       {{productDetails.description | slice: 0:150}}
+                   </div>
+                   <div>
+                    <P class="total_price">Total Price: {{productDetails.price*productQuantity | currency: "INR"}}</P>
+                   </div>
+                   <div>
+                    <P class="" style="color: black; font-size: 15px; font-weight: 400;">Delivery Date: Within 3 Days</P>
+                   </div>
+                   <div>
+                    <P class="pament_option">Pament Option: Cash On Delivery</P>
+                   </div>
+              </div>
+              <h2 class="delivery_details">Product Delivery Details</h2>
+              <label>Product Delivery Address</label>
+              <p class="delivery_info_text">{{deliveryAddressForm.value.delivaryAddress}}</p>
+              <label>Pincode</label>
+              <p class="delivery_info_text">{{deliveryAddressForm.value.pincode}}</p>
+              <label>Phone Number</label>
+              <p class="delivery_info_text">{{deliveryAddressForm.value.contactNumber}}</p>
+           </div>  
+        </mat-card>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" (click)="placeOrder(productId)">Place Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+</section>
+
+
+
+

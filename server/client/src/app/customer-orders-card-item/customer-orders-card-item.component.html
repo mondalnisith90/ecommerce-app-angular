@@ -1,0 +1,47 @@
+<div class="row mt-2 ">
+    <div class=" col-md-3 text-center ">
+        <img class="img-fluid" style="width: 100%; height: 200px; object-fit:contain;" [src]="productdetails.imgUrl" alt="cart image" />
+    </div> 
+    <div class="col-md-9">
+           <div class=" d-flex justify-content-between ">
+              <div>
+                  <!-- {{productdetails | json}} -->
+                <h2 class="product_title pt-2">{{productdetails.name  | slice: 0:25}}</h2>
+               </div>
+               <div>
+                <h3 class="item_count_text pt-2">{{customerOrder.quentity}} pic</h3>
+               </div>
+            <div>
+               <P class="product_price  p-2">Total: {{customerOrder.price | currency:'INR'}}</P>
+            </div>
+           </div> 
+           <div class="product_description">
+               {{productdetails.description | slice: 0:180}}
+           </div>
+           <div class="product_description my-1">
+            <b>Product Id: <a [routerLink]="productDetailsUrl"> {{customerOrder.productId}}  </a></b>
+            </div>
+           <div class="product_description">
+             Delivary Address: {{customerOrder.delivaryAddress}}
+             </div>
+             <div class="product_description">
+                Pincode: {{customerOrder.pincode}}
+            </div>
+             <div class="product_description">
+               Phone Number: {{customerOrder.contactNumber}}
+             </div> 
+             <div class="product_description">
+                Product Order Date: {{customerOrder.timeStamp}}
+              </div>
+             <div class="product_description">
+               Product Delivary Date: Within 3 days
+             </div>
+           <div class="footer mt-3 mb-1">
+            <!-- <button mat-raised-button color="secondary" class="ms-3 cart_button" >Buy now</button> -->
+            <button  class="ms-0 btn btn-success btn-sm" *ngIf="customerOrder.delivaryStatus==='pending'" (click)="alreadyDeliverBtnClick()" >Already Deliverd</button>
+            <h2 style="color: green;" *ngIf="customerOrder.delivaryStatus==='successfull'">Producr deliverd successfully</h2>
+            <h2 style="color: red;" *ngIf="customerOrder.delivaryStatus==='cancel'">Customer cancel this order</h2>
+
+           </div>
+      </div>
+   </div>  

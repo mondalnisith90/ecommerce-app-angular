@@ -6,20 +6,17 @@ const productsModel = require("../models/products_models")
 //create new products
 router.post("/add", async (req, res) => {
     try {
-        const { name, catagory, price, description } = req.body
-        if (!name || !catagory || !price || !description) {
-            console.log("Enter all fields properly");
-            res.status(422).json("Enter all fields properly")
+        const { name, catagory, price, description, imgUrl } = req.body
+        if (!name || !catagory || !price || !description || !imgUrl) {
+            res.status(422).json("Enter all the fields properly");
         } else {
-            const productsData = productsModel(req.body)
-            const saveData = await productsData.save()
-            console.log(saveData);
-            res.status(201).json(saveData)
+            const productsData = productsModel(req.body);
+            const saveData = await productsData.save();
+            res.status(201).json(saveData);
         }
 
     } catch (error) {
-        res.json("Products Registration failed"+error)
-        console.log("Products Registration failed"+error);
+        res.json("Products Registration failed"+error);
     }
 })
 // view all products

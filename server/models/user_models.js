@@ -11,6 +11,10 @@ const userSchema =new mongoose.Schema({
         minlenth:[3,"Username must be atleast 3 characters"]
 
     },
+    userType: {
+        type: String,
+        default: "user"
+    },
     mobile:{
         required:true,
         type:Number
@@ -83,8 +87,8 @@ const userSchema =new mongoose.Schema({
             },
             delivaryStatus: {
                 //If the product is already deliver then this field value will be true
-                type: Boolean,
-                default: false
+                type: String,
+                default: "pending" //It's value will be either pending, successfull, cancel.
             },
             
             timeStamp: {

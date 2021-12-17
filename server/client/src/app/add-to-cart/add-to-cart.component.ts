@@ -10,7 +10,7 @@ import { ApplicationDataService } from '../services/application-data.service';
 export class AddToCartComponent implements OnInit {
 
   private appliactionData: any = null;
-  cartProducts: Array<ProductCart> = [];
+  cartProductItems: Array<any> = [];
 
 
   constructor(private applicationDataService: ApplicationDataService) { }
@@ -18,9 +18,10 @@ export class AddToCartComponent implements OnInit {
   ngOnInit(): void {
     this.applicationDataService.getAppData().subscribe((data)=>{
       this.appliactionData = data;
-      console.log("ngOnInit() data is called application data is changed..");
-      console.log(data)
-      this.getAllCartProducts();
+      // console.log("ngOnInit() data is called application data is changed..");
+      // console.log(data)
+      // this.getAllCartProducts();
+      this.cartProductItems = this.appliactionData.cartItems;
     }, (error)=>{
 
     });
@@ -28,29 +29,33 @@ export class AddToCartComponent implements OnInit {
 
   public getCartProductCount(): number{
     if(this.appliactionData){
-      // return this.appliactionData.myProducts.length;
-      return this.cartProducts.length;
+      return this.cartProductItems.length;
     }
     return 0;
   }
 
-  public getAllCartProducts(): Array<ProductCart>{
-    const myProducts = this.appliactionData.myProducts;
-    const productsIdSet = new Set(myProducts);
-    this.cartProducts = [];
-    productsIdSet.forEach((productId: any)=>{
-      let idFrequency = 0;
-      myProducts.forEach((id: string)=>{
-        if(id===productId){
-          idFrequency++;
-        }
-      });
-      this.cartProducts.push({
-        productId: productId,
-        frequency: idFrequency
-      });
-    });
-    return this.cartProducts;
-  }
+  // public getAllCartProducts(): Array<ProductCart>{
+  //   const myProducts = this.appliactionData.myProducts;
+  //   const productsIdSet = new Set(myProducts);
+  //   this.cartProducts = [];
+  //   productsIdSet.forEach((productId: any)=>{
+  //     let idFrequency = 0;
+  //     myProducts.forEach((id: string)=>{
+  //       if(id===productId){
+  //         idFrequency++;
+  //       }
+  //     });
+  //     this.cartProducts.push({
+  //       productId: productId,
+  //       frequency: idFrequency
+  //     });
+  //   });
+  //   return this.cartProducts;
+  // }
+
+  // public getAllCartProducts(): Array<any>{
+  //   const cartProductItems = this.appliactionData.cartItems;
+  //   return this.cartProductItems;
+  // }
 
 }

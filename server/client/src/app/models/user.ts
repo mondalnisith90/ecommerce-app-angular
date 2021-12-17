@@ -5,6 +5,6 @@ export interface User{
     password: string,
     mobile: string
     address: string
-    myProducts: Array<string>,
+    cartItems: Array<string>,
     wishlist: Array<string>
 }

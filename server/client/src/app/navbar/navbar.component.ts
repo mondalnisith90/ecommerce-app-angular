@@ -10,6 +10,7 @@ import { ApplicationDataService } from '../services/application-data.service';
 export class NavbarComponent implements OnInit {
 
   loginStatus: boolean = false;
+  userType: string = "user";
   totalCartItems: number = 0;
 
 
@@ -20,10 +21,13 @@ export class NavbarComponent implements OnInit {
       // console.log("Navbar")
       // console.log(data);
       this.loginStatus = data.isAlreadyLogin;
+      this.userType = data.userType; //Admin or user
       if(data.userId && data.isAlreadyLogin){
         //Current user is already login
         this.totalCartItems = 0;
-        data.myProducts.forEach((productid: string)=>{
+        // console.log("Navbar")
+        // console.log(data);
+        data.cartItems.forEach((cartProductItem: any)=>{
           this.totalCartItems++;
         });
       }else{
@@ -32,14 +36,25 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  logoutLinkClick(){
+  userLogoutLinkClick(){
     this.applicationDataService.setAppData({  
     userId: "",
     username: "",
-    myProducts: [],
+    cartItems: [],
     wishlist: [],
     isAlreadyLogin: false});
     this.router.navigate(['/signin']);
+  }
+
+  adminLogoutLinkClick(){
+    this.applicationDataService.setAppData({  
+      userId: "",
+      username: "",
+      cartItems: [],
+      wishlist: [],
+      userType: "user",
+      isAlreadyLogin: false});
+      this.router.navigate(['/signin']);
   }
 
 }

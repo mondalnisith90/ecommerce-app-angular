@@ -76,6 +76,24 @@ router.put("/add-to-cart/:uid", async (req, res)=>{
     }
 });
 
+//To update add to cart product quantity
+router.put("/add-to-cart-change-quentity/:uid", async (req, res)=>{
+    try {
+        const userId = req.params.uid;
+        const {productId, quentity} = req.body;
+        console.log(productId)
+        const dbResponse = await userModel.findOneAndUpdate({_id: userId, "cartItems.productId": productId }, {$set: {"cartItems.$": {productId, quentity}}}, {new: true});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user id ");
+    }
+});
+
+
 
 //Add product to user cart 
 router.put("/remove-from-cart/:uid", async (req, res)=>{
@@ -149,6 +167,68 @@ router.get("/profile/:uId", async (req, res)=>{
     }
 });
 
+//Add User Order
+router.put("/order/:uid", async (req, res)=>{
+    const userId = req.params.uid;
+    const { productId, price, quentity, delivaryAddress, pincode, contactNumber } = req.body;
+    try {
+        if(!productId || !price || !quentity || !delivaryAddress || !pincode || !contactNumber){
+            res.status(422).json("Please fill input fields properly.");
+        }else{
+            const dbResponse = await userModel.findByIdAndUpdate(userId, {$push: {orderItems: req.body}}, {new: true});
+            if(dbResponse){
+                const allOrders = dbResponse.orderItems;
+                if(allOrders.length>0){
+                    const orderDetails = allOrders[allOrders.length-1];
+                    console.log(orderDetails)
+                    res.status(200).json(orderDetails);
+                }else{
+                    throw new Error();
+                }
+            }else{
+                throw new Error();
+            }
+        }
+    } catch (error) {
+        res.status(400).json("Order not successfull, something went wrong "+error.message);
+    }
+});
+
+//Change user delivery status
+
+router.put("/update-delivary-status/:uid", async (req, res)=>{
+    const userId = req.params.uid;
+    const {documentId, delivaryStatus} = req.body;
+    try {
+        if(! delivaryStatus){
+            res.status(422).json("Please fill input field properly.");
+        }else{
+            const dbResponse = await userModel.findOneAndUpdate({_id: userId, "orderItems._id": documentId}, {$set: {"orderItems.$.delivaryStatus": delivaryStatus}}, {new: true});
+            if(dbResponse){
+                res.status(200).json(dbResponse);
+            }else{
+                throw new Error();
+            }
+        }
+    } catch (error) {
+        res.status(400).json("Invalid User Id");
+    }
+});
+
+router.get("/my-orders/:uid", async (req, res)=>{
+    const userId = req.params.uid;
+    try {
+        const dbResponse = await userModel.findById(userId, {username: 0, mobile: 0, email: 0, password: 0, address: 0, jwtToken: 0, cartItems: 0, wishlist: 0});
+        if(dbResponse){
+            res.status(200).json(dbResponse);
+        }else{
+            throw new Error();
+        }
+    } catch (error) {
+        res.status(400).json("Invalid user");
+    }
+
+});
 
 
 

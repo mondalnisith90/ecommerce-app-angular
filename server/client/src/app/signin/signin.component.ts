@@ -31,9 +31,10 @@ export class SigninComponent implements OnInit {
         const appData = {
           userId: data._id,
           username: data.username,
-          myProducts: data.myProducts,
+          cartItems: data.cartItems,
           wishlist: data.wishlist,
-          isAlreadyLogin: true 
+          isAlreadyLogin: true,
+          userType: data.userType 
         }
         this.applicationDataService.setAppData(appData);
       }, 1000);

@@ -23,6 +23,14 @@ import { AddToCartCardItemComponent } from './add-to-cart-card-item/add-to-cart-
 import { WishListCardComponent } from './wish-list-card/wish-list-card.component';
 import { CustomerComponent } from './customer/customer.component';
 import { SellerComponent } from './seller/seller.component';
+import { AdminSigninComponent } from './admin-signin/admin-signin.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
+import { CustomerOrdersCardItemComponent } from './customer-orders-card-item/customer-orders-card-item.component';
+import { BuyNowComponent } from './buy-now/buy-now.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { MyOrdersCardItemComponent } from './my-orders-card-item/my-orders-card-item.component';
 
 
 
@@ -44,7 +52,15 @@ import { SellerComponent } from './seller/seller.component';
     AddToCartCardItemComponent,
     WishListCardComponent,
     CustomerComponent,
-    SellerComponent
+    SellerComponent,
+    AdminSigninComponent,
+    AddProductComponent,
+    CustomerOrdersComponent,
+    CustomerOrdersCardItemComponent,
+    BuyNowComponent,
+    MyOrdersComponent,
+    ProductDetailsComponent,
+    MyOrdersCardItemComponent
   ],
   imports: [
     BrowserModule,

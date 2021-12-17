@@ -1,0 +1,31 @@
+<div class="root_div">
+<div class="container">
+<mat-card *ngIf="! invalidProductId">
+<div class="row mt-2 ">
+    <div class=" col-md-3 text-center ">
+        <img class="img-fluid" style="width: 100%; height: 200px; object-fit:contain;" [src]="productDetails.imgUrl" alt="cart image" />
+    </div> 
+    <div class="col-md-9">
+              <div>
+                <h2 class="product_title pt-2">{{productDetails.name}}</h2>
+               </div>
+           <div>
+            <P class="product_price  p-0">Price: {{productDetails.price | currency: "INR"}}/pic</P>
+         </div>
+           <div class="product_description">
+               {{productDetails.description}}
+           </div>
+           <div class="footer mt-4 mb-3">
+            <button class="btn btn-primary btn-sm"  (click)="buyProductBtnClick(productId)" >Buy Now</button>
+            <button class="btn btn-success btn-sm ms-2"  (click)="addToWishlistBtnClick(productId)" >Add To Wishlist</button>
+            <button class="btn btn-danger btn-sm ms-2"  (click)="addToCartBtnClick(productId)">Add To cart</button>
+
+           </div>
+      </div>
+   </div>  
+</mat-card>
+<mat-card  *ngIf="invalidProductId" >
+    <h1 class="error_text">Invalid product Id</h1>
+</mat-card>
+</div>
+</div>
