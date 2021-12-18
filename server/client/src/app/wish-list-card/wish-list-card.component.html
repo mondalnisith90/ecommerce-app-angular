@@ -14,6 +14,9 @@
            <div class="product_description">
                {{product.description | slice: 0:180}}...
            </div>
+           <div class="" style="color: black; font-size: 16px; font-weight: 450; margin-top: 5px;">
+            Date: {{wishListProduct.timeStamp | date}}
+            </div>
            <div class="footer my-4">
             <!-- <button mat-raised-button color="primary" class="cart_button" ><mat-icon class="me-2" >remove_circle</mat-icon> {{totalProductCount}} <mat-icon class="ms-2"  (click)="incrementCartCountBtnClick()">add_circle</mat-icon></button> -->
             <button class="btn btn-primary" (click)="buyNowBtnClick(product._id)" >Buy Now</button>

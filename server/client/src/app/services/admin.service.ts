@@ -19,23 +19,23 @@ export class AdminService {
     );
   }
 
-  public getAllCustomerorders(userId: string): Observable<any>{
-    const serverUrl = `${this.baseUrl}/all-customer-orders/${userId}`;
+  public getAllCustomerorders(): Observable<any>{
+    const serverUrl = `${this.baseUrl}/all-customer-orders`;
     return this.httpClient.get(serverUrl, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public addCustomerOrderOnAdmin(adminId: any, orderDetails: any): Observable<any>{
+  public addCustomerOrderOnAdmin(adminId: string, orderDetails: any): Observable<any>{
     const serverUrl = `${this.baseUrl}/add-customer-order/${adminId}`;
     return this.httpClient.put(serverUrl, orderDetails, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public getCustomerAllOrders(adminId: string): Observable<any> {
-    const serverUrl = `${this.baseUrl}/customer-orders/${adminId}`;
-    return this.httpClient.get(serverUrl).pipe(
+  public getCustomerAllOrders(): Observable<any> {
+    const serverUrl = `${this.baseUrl}/customer-orders`;
+    return this.httpClient.get(serverUrl, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
@@ -46,6 +46,15 @@ export class AdminService {
       catchError(this.handelError)
     );
   }
+
+public adminLogout(): Observable<any> {
+  const serverUrl = `${this.baseUrl}/logout`;
+  return this.httpClient.get(serverUrl, {withCredentials: true}).pipe(
+    catchError(this.handelError)
+  );
+}
+
+
 
   private handelError(error: HttpErrorResponse){
     return throwError(error.error);

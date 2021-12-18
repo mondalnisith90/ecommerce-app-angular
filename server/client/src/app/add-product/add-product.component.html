@@ -1,1 +1,44 @@
-<p>add-product works!</p>
+<div class="root_div" >
+    <div class="main_div card shadow">
+        <h1 class="heading_text" >Add New Product</h1>
+        <hr class="hr_line" />
+        <p style="color: red" >{{serverError}}</p>
+        <form [formGroup]="productForm" (ngSubmit)="productFormSubmit()" >
+            <div class="mb-3">
+             <label for="exampleInputUserName" class="form-label">Product Name*</label>
+             <input type="text" class="form-control" placeholder="Enter product name" formControlName="name" id="exampleInputUserName" aria-describedby="emailHelp">
+             <div *ngIf="productForm.controls.name.touched" >
+                <label class="form_error" *ngIf="productForm.controls.name.errors?.required" >Product name is required.</label> 
+             </div>
+            </div>
+            <div class="mb-3">
+              <label for="dropdownOptions" class="form-labesl">Select Product Category*</label>
+              <select class="form-select" aria-label="Default select example" formControlName="catagory" id="dropdownOptions">
+                <option *ngFor="let category of productCategoryList" [value]="category">{{category}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Product Price*</label>
+              <input type="number" class="form-control" placeholder="Enter product price" formControlName="price" id="exampleInputPassword1">
+            <div *ngIf="productForm.controls.price.touched">
+              <label class="form_error" *ngIf="productForm.controls.price.errors?.required" >Price field is required.</label>
+            </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Product Description*</label>
+              <textarea class="form-control" formControlName="description" placeholder="Enter product description" id="exampleFormControlTextarea1" rows="4"></textarea>
+             <div *ngIf="productForm.controls.description.touched">
+              <label class="form_error" *ngIf="productForm.controls.description.errors?.required" >Product description field is required.</label>
+            </div>
+            </div>
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Select Product Image*</label>
+              <input class="form-control" formControlName="imgUrl" (change)="fileInputChange($event)" type="file" accept="image/*" id="formFile">
+              <div *ngIf="productForm.controls.imgUrl.touched">
+                <label class="form_error" *ngIf="productForm.controls.imgUrl.errors?.required" >Product image field is required.</label>
+              </div>
+            </div>
+            <button type="submit" [disabled]="productForm.invalid" class="mt-4 btn btn-success" >Save Product</button>
+          </form>
+    </div>
+</div>

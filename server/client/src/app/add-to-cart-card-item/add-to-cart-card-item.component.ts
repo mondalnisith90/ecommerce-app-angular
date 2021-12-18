@@ -37,7 +37,7 @@ export class AddToCartCardItemComponent implements OnInit {
   }
 
   incrementCartCountBtnClick(){
-    this.productService.changecartproductQuentity(this.applicationData.userId, this.cartProduct.productId, this.totalProductCount+1).subscribe((data)=>{
+    this.productService.changecartproductQuentity(this.cartProduct.productId, this.totalProductCount+1).subscribe((data)=>{
       this.totalProductCount++;
       this.applicationDataService.setAppData({
         cartItems: data.cartItems
@@ -47,7 +47,7 @@ export class AddToCartCardItemComponent implements OnInit {
 
   decreaseCartCountBtnClick(){
     if(this.totalProductCount>1){
-      this.productService.changecartproductQuentity(this.applicationData.userId, this.cartProduct.productId, this.totalProductCount-1).subscribe((data)=>{
+      this.productService.changecartproductQuentity(this.cartProduct.productId, this.totalProductCount-1).subscribe((data)=>{
         this.totalProductCount--;
         this.applicationDataService.setAppData({
           cartItems: data.cartItems
@@ -59,7 +59,7 @@ export class AddToCartCardItemComponent implements OnInit {
   removeCartItemBtnClick(productId: string){
     if(this.applicationData && this.applicationData.userId && this.applicationData.isAlreadyLogin){
       //remove cart item
-      this.productService.removeProductFromCart(this.applicationData.userId, productId).subscribe((data)=>{
+      this.productService.removeProductFromCart(productId).subscribe((data)=>{
         this.applicationDataService.setAppData({cartItems: data.cartItems});
       }, (error)=>{
         alert("Product not remove from cart "+error);

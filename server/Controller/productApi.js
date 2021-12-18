@@ -1,10 +1,12 @@
 const express = require("express");
 const { modelName } = require("../models/products_models");
 const router = express.Router();
-const productsModel = require("../models/products_models")
+const productsModel = require("../models/products_models");
+const adminAuth = require('../auth/admin_auth');
+
 
 //create new products
-router.post("/add", async (req, res) => {
+router.post("/add", adminAuth, async (req, res) => {
     try {
         const { name, catagory, price, description, imgUrl } = req.body
         if (!name || !catagory || !price || !description || !imgUrl) {
@@ -72,9 +74,9 @@ router.get("/name/:data", async (req, res) => {
 });
 
 //Search by Id and Update
-router.put("/update/:id",async(req,res)=>{
+router.put("/update/:pid", adminAuth, async(req,res)=>{
 try {
-    const _id = req.params.id.trim()
+    const _id = req.params.pid;
     const dbResponse=await productsModel.findByIdAndUpdate(_id,req.body,{new:true})
     res.status(200).json(dbResponse)
 } catch (error) {
@@ -84,7 +86,7 @@ try {
 
 
 //delete by ID
-router.delete("/delete/:pId",async(req,res)=>{
+router.delete("/delete/:pId", adminAuth, async(req,res)=>{
     try {
         const _id = req.params.pId
         const dbResponse = await productsModel.findByIdAndDelete(_id)

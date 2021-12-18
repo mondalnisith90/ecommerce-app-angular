@@ -63,7 +63,7 @@ export class ProductCardComponent implements OnInit {
     if(this.saveProductIconStatus){
       if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
         //If user is already login, then only he/she can add product to wishlist
-      this.productService.removeProductFromWishlist(this.currentUserData.userId, this.product._id).subscribe((data)=>{
+      this.productService.removeProductFromWishlist(this.product._id).subscribe((data)=>{
         // console.log(data);
         this.saveProductIconStatus = false;
         if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
@@ -77,7 +77,7 @@ export class ProductCardComponent implements OnInit {
     }
     }else{
       if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
-      this.productService.addProductToWishlist(this.currentUserData.userId, this.product._id).subscribe((data)=>{
+      this.productService.addProductToWishlist(this.product._id).subscribe((data)=>{
         console.log(data);
         this.saveProductIconStatus = true;
         if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
@@ -105,7 +105,7 @@ export class ProductCardComponent implements OnInit {
     if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
     if(this.addToCartButtonCaption === this.addToCartText){  
       //If product is added to user cart
-    this.productService.performAddToCart(this.currentUserData.userId, this.product._id).subscribe((data)=>{
+    this.productService.performAddToCart(this.product._id).subscribe((data)=>{
       // console.log(data);
       // alert("Product is added to your cart");
       this.applicationDataService.setAppData({cartItems: data.cartItems});
@@ -115,7 +115,7 @@ export class ProductCardComponent implements OnInit {
     });
   }else if(this.addToCartButtonCaption === this.removeFromCartText){
     //If product is removed from user cart
-    this.productService.removeProductFromCart(this.currentUserData.userId, this.product._id).subscribe((data)=>{
+    this.productService.removeProductFromCart(this.product._id).subscribe((data)=>{
       this.applicationDataService.setAppData({cartItems: data.cartItems});
       this.addToCartButtonCaption = this.addToCartText;
     }, (error)=>{

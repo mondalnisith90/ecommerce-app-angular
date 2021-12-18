@@ -31,6 +31,9 @@ import { BuyNowComponent } from './buy-now/buy-now.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { MyOrdersCardItemComponent } from './my-orders-card-item/my-orders-card-item.component';
+import { AdminAllProductComponent } from './admin-all-product/admin-all-product.component';
+import { AdminAllProductCardComponent } from './admin-all-product-card/admin-all-product-card.component';
+import { CustomerOrderStatusComponent } from './customer-order-status/customer-order-status.component';
 
 
 
@@ -60,7 +63,10 @@ import { MyOrdersCardItemComponent } from './my-orders-card-item/my-orders-card-
     BuyNowComponent,
     MyOrdersComponent,
     ProductDetailsComponent,
-    MyOrdersCardItemComponent
+    MyOrdersCardItemComponent,
+    AdminAllProductComponent,
+    AdminAllProductCardComponent,
+    CustomerOrderStatusComponent
   ],
   imports: [
     BrowserModule,

@@ -82,7 +82,7 @@ export class BuyNowComponent implements OnInit {
    
 
 
-    this.userService.placeUserOrder(this.applicationData.userId, orderDetails).subscribe((orderData)=>{
+    this.userService.placeUserOrder(orderDetails).subscribe((orderData)=>{
       const orderId = orderData._id;
       let orderDetailsForAdmin = {
         customerId: this.applicationData.userId,

@@ -29,13 +29,18 @@
           <li class="nav-item ms-3" *ngIf="loginStatus" >
             <a  (click)="userLogoutLinkClick()" class="nav-link nav_link" aria-current="page"  routerLink="/logout"  routerLinkActive="active"  >Logout</a>
           </li>
+          <li class="nav-item ms-3"  *ngIf="loginStatus" >
+            <a class="nav-link nav_link disabled" aria-current="page"   style="color: chocolate !important;"  >{{userName}}</a>
+          </li>
           <li class="nav-item ms-5" style="width: 500px;">
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search items..." aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <input class="form-control me-2" #input_field type="search" placeholder="Search product..." aria-label="Search">
+              <button class="btn btn-outline-success"  (click)="navbarSearchButtonClick(input_field.value)">Search</button>
             </form>
           </li>
         </ul>
+
+       
        
         <ul *ngIf="userType==='user'" class="navbar-nav  mb-2" >
             <a routerLink="/add-to-cart" ><mat-icon class="add_to_cart_icon" [matBadge]="totalCartItems" matBadgeColor="warn">add_shopping_cart</mat-icon></a>
@@ -43,18 +48,21 @@
 
         <!-- navbar for admin -->
         <ul *ngIf="userType==='admin'" class="navbar-nav me-auto ms-3 mb-2 mb-lg-0">
-          <li class="nav-item"  >
-            <!-- [routerLinkActiveOptions]="{exact: true}" -->
-            <a class="nav-link nav_link"  aria-current="page" routerLink="/add-product" routerLinkActive="active"  >Add product</a>
-          </li>
           <li class="nav-item" *ngIf="loginStatus" >
-            <a class="nav-link nav_link"  aria-current="page" routerLink="/customer-oders" routerLinkActive="active"  >Customer-Orders</a>
+            <a class="nav-link nav_link"  aria-current="page" routerLink="/admin-all-product" routerLinkActive="active"  >Products</a>
+          </li>
+          <li class="nav-item ms-3"  >
+            <!-- [routerLinkActiveOptions]="{exact: true}" -->
+            <a class="nav-link nav_link"  aria-current="page" routerLink="/add-product" routerLinkActive="active"  >Add-Product</a>
+          </li>
+          <li class="nav-item ms-3" *ngIf="loginStatus" >
+            <a class="nav-link nav_link"  aria-current="page" routerLink="/customer-oders/status/pending" routerLinkActive="active"  >Customer-Orders</a>
           </li>
           <li class="nav-item ms-3" *ngIf="loginStatus" >
             <a  (click)="adminLogoutLinkClick()" class="nav-link nav_link" aria-current="page"  routerLink="/admin-logout"  routerLinkActive="active"  >Logout</a>
           </li>
-          <li class="nav-item" >
-            <a class="nav-link nav_link disabled"  aria-current="page"   >Admin Dashboard</a>
+          <li class="nav-item ms-5" >
+            <a class="nav-link nav_link disabled"  aria-current="page" style="color: chocolate !important;"  >Admin User</a>
           </li>
         </ul>
        

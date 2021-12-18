@@ -3,12 +3,10 @@
         <mat-card  class="container mb-2 mt-0 header_text"  >Customer Orders</mat-card>
     </div>
     <div class="body_div container">
-        <div class="row">
-            <div class="col-md-12" *ngFor="let customerOrder of allCustomerOrders">
-                <mat-card class="mb-2">
-                <app-customer-orders-card-item  [customerOrder]="customerOrder" ></app-customer-orders-card-item>
-               </mat-card>
-            </div>
-        </div>
+        <a routerLink="/customer-oders/status/pending">Pending Orders</a><br/>
+        <a routerLink="/customer-oders/status/successfull">Successfull Orders</a><br/>
+        <a routerLink="/customer-oders/status/cancel">Cancel Orders</a><br/>
+      <router-outlet></router-outlet>
+
     </div>
 </section>

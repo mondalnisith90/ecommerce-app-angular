@@ -25,16 +25,16 @@ export class UserService {
     );
 }
 
-public placeUserOrder(userId: any, orderDetails: any): Observable<any>{
-  const serverUrl = `${this.baseUrl}order/${userId}`;
+public placeUserOrder(orderDetails: any): Observable<any>{
+  const serverUrl = `${this.baseUrl}order`;
   return this.httpClient.put(serverUrl, orderDetails, {withCredentials: true}).pipe(
     catchError(this.handelError)
   );
 }
 
 public getCurrentUserAllOrders(userId: string): Observable<any> {
-  const serverUrl = `${this.baseUrl}my-orders/${userId}`;
-  return this.httpClient.get(serverUrl).pipe(
+  const serverUrl = `${this.baseUrl}my-orders`;
+  return this.httpClient.get(serverUrl, {withCredentials: true}).pipe(
     catchError(this.handelError)
   );
 }
@@ -42,6 +42,20 @@ public getCurrentUserAllOrders(userId: string): Observable<any> {
 public updateUserProductDeliveryStatus(userId: string, delivaryStatus: string, documentId: string): Observable<any>{
   const serverUrl = `${this.baseUrl}update-delivary-status/${userId}`;
   return this.httpClient.put(serverUrl, {documentId, delivaryStatus}, {withCredentials: true}).pipe(
+    catchError(this.handelError)
+  );
+}
+
+public getUserProfile(): Observable<any> {
+  const serverUrl = `${this.baseUrl}/profile`;
+  return this.httpClient.get(serverUrl, {withCredentials: true}).pipe(
+    catchError(this.handelError)
+  );
+}
+
+public userLogout(): Observable<any> {
+  const serverUrl = `${this.baseUrl}logout`;
+  return this.httpClient.get(serverUrl, {withCredentials: true}).pipe(
     catchError(this.handelError)
   );
 }

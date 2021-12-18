@@ -27,7 +27,7 @@ export class AdminSigninComponent implements OnInit {
     this.serverError = "";
     this.adminService.adminSignin(value.email, value.password).subscribe((serverData)=>{
       setTimeout(()=>{
-        this.router.navigate(['/add-product']);
+        this.router.navigate(['/admin-all-product']);
         this.applicationDataService.setAppData({
           userId: serverData._id,
           username: serverData.userName,

@@ -4,16 +4,13 @@
             <app-category-item-card class="col-lg-1 col-md-1 col-sm-2 col-3 card me-2 my-1 category_card_item" style="width: 100px !important; height: 100px !important; cursor: pointer;" *ngFor="let category of productCategory" [category]="category" (click)="productCategoryBtnClick(category)" ></app-category-item-card>
         </div>
         <div class="body_div row g-3">
-          <div *ngFor="let product of products"  class="col-lg-3 col-md-3 col-sm-2 col-12 p-2">
-            <app-product-card  [product]="product"></app-product-card>
+          <div *ngFor="let product of allProducts"  class="col-lg-3 col-md-3 col-sm-2 col-12 p-2">
+            <app-admin-all-product-card [product]="product" (eventEmiter)="getProducts(category)" ></app-admin-all-product-card>
           </div>  
-          <div>
-            <h1 class="home_empty_product_text" *ngIf="products.length==0" >Oops! This product category is currently unavailable...</h1>
+          <div class="mt-2">
+            <h1 class="home_empty_product_text" *ngIf="allProducts.length==0 && !errorStatus" >Oops! This product category is currently unavailable...</h1>
+            <h1 class="home_empty_product_text" *ngIf="errorStatus" >You are not unauthorized to access this resource...</h1>
           </div>
         </div>
     </div>
-    
-    <!-- <a routerLink="/home/customer">customer</a>
-    <a class="ms-5" routerLink="/home/seller">seller</a>
-    <router-outlet></router-outlet> -->
 </div>

@@ -37,7 +37,7 @@ export class WishListCardComponent implements OnInit {
   removeProductBtnClick(productId: string){
     if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){
       //If user is already login, then only he/she can add product to wishlist
-    this.productService.removeProductFromWishlist(this.currentUserData.userId, this.product._id).subscribe((data)=>{
+    this.productService.removeProductFromWishlist(this.product._id).subscribe((data)=>{
       // console.log(data);
       // this.saveProductIconStatus = false;
       if(this.currentUserData && this.currentUserData.userId && this.currentUserData.isAlreadyLogin){

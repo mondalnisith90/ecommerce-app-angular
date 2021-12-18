@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const validator= require("validator");
+const validator = require("validator");
+const jwt = require('jsonwebtoken');
 
 const adminSchema = new mongoose.Schema({
     userName: {
@@ -60,10 +61,25 @@ const adminSchema = new mongoose.Schema({
                 type: Date,
                 default: new Date(Date.now())
             }
-            
         }]
+    },
+    jwtToken:{
+        type: String,
+        default: ""
     }
 });
+
+adminSchema.methods.createJWTToken = async function() {
+    try {
+        const jwtTokenKey = await jwt.sign({_id: this._id}, process.env.JWT_SECRET_KEY);
+        this.jwtToken = jwtTokenKey;
+        await this.save();
+        console.log(this)
+        return jwtTokenKey;
+    } catch (error) {
+        throw new Error();
+    }
+}
 
 const adminModel = mongoose.model("adminCollection", adminSchema);
 

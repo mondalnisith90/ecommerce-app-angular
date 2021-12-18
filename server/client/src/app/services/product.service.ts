@@ -65,37 +65,59 @@ export class ProductService {
   //   return this.httpClient.get(serverUrl, )
   // }
 
-  public performAddToCart(userId: string, productId: string): Observable<any>{
-    const serverUrl = `http://localhost:8002/user/add-to-cart/${userId}`;
-    return this.httpClient.put<User>(serverUrl, {productId, quentity: 1}).pipe(
+  public performAddToCart(productId: string): Observable<any>{
+    const serverUrl = `http://localhost:8002/user/add-to-cart`;
+    return this.httpClient.put<User>(serverUrl, {productId, quentity: 1}, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public changecartproductQuentity(userId: string, productId: string, quentity: number): Observable<any>{
-    const serverUrl = `http://localhost:8002/user/add-to-cart-change-quentity/${userId}`;
-    return this.httpClient.put(serverUrl, {productId, quentity}).pipe(
+  public changecartproductQuentity(productId: string, quentity: number): Observable<any>{
+    const serverUrl = `http://localhost:8002/user/add-to-cart-change-quentity`;
+    return this.httpClient.put(serverUrl, {productId, quentity}, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
   
-  public removeProductFromCart(userId: string, productId: string): Observable<any> {
-    const serverUrl = `http://localhost:8002/user/remove-from-cart/${userId}`;
-    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+  public removeProductFromCart(productId: string): Observable<any> {
+    const serverUrl = `http://localhost:8002/user/remove-from-cart`;
+    return this.httpClient.put<User>(serverUrl, {productId}, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public addProductToWishlist(userId: string, productId: string): Observable<any>{
-    const serverUrl = `http://localhost:8002/user/add-to-wishlist/${userId}`;
-    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+  public addProductToWishlist(productId: string): Observable<any>{
+    const serverUrl = `http://localhost:8002/user/add-to-wishlist`;
+    return this.httpClient.put<User>(serverUrl, {productId}, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }
 
-  public removeProductFromWishlist(userId: string, productId: string): Observable<any>{
-    const serverUrl = `http://localhost:8002/user/remove-from-wishlist/${userId}`;
-    return this.httpClient.put<User>(serverUrl, {productId}).pipe(
+  public removeProductFromWishlist(productId: string): Observable<any>{
+    const serverUrl = `http://localhost:8002/user/remove-from-wishlist`;
+    return this.httpClient.put<User>(serverUrl, {productId}, {withCredentials: true}).pipe(
+      catchError(this.handelError)
+    );
+  }
+
+  
+  public addNewProduct(productDetails: any): Observable<any> {
+    const serverUrl = `${this.baseUrl}add`;
+    return this.httpClient.post(serverUrl, productDetails, {withCredentials: true}).pipe(
+      catchError(this.handelError)
+    );
+  }
+
+  public deleteProduct(productId: string): Observable<any> {
+    const serverUrl = `${this.baseUrl}delete/${productId}`;
+    return this.httpClient.delete(serverUrl, {withCredentials: true}).pipe(
+      catchError(this.handelError)
+    );
+  }
+
+  public updateProduct(productId: string, updateDetails: any): Observable<any> {
+    const serverUrl = `${this.baseUrl}update/${productId}`;
+    return this.httpClient.put(serverUrl, updateDetails, {withCredentials: true}).pipe(
       catchError(this.handelError)
     );
   }

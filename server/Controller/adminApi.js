@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const adminModel = require('../models/admin_model');
 const { route } = require('./userApi');
+const adminAuth = require('../auth/admin_auth');
 
 router.post("/signup", async (req, res)=>{
     const {userName, email, password} = req.body;
@@ -33,8 +34,10 @@ router.post("/signin", async (req, res)=>{
         if(!email || !password){
             res.status(422).json("Please fill input fields properly.");
         }else{
-            const dbResponse = await adminModel.findOne({email, password}, {customerOders: 0, password: 0, email: 0});
+            const dbResponse = await adminModel.findOne({email, password});
             if(dbResponse){
+                const jwtToken = await dbResponse.createJWTToken();
+                res.cookie("user_key", jwtToken, {httpOnly: true});
                 res.status(200).json(dbResponse);
             }else{
                 throw new Error();
@@ -45,10 +48,10 @@ router.post("/signin", async (req, res)=>{
     }
 });
 
-router.get("/all-customer-orders/:uid", async (req, res)=>{
-    const userId = req.params.uid;
+router.get("/all-customer-orders", adminAuth, async (req, res)=>{
+    const userId = req.adminId;
     try {
-        const dbResponse = await adminModel.findById(userId, {email: 0, password: 0, userType: 0, userName: 0});
+        const dbResponse = await adminModel.findById(userId, {email: 0, password: 0, userType: 0, userName: 0, jwtToken: 0});
         if(dbResponse){
             res.status(200).json(dbResponse);
         }else{
@@ -60,8 +63,8 @@ router.get("/all-customer-orders/:uid", async (req, res)=>{
 });
 
 
-router.put("/add-customer-order/:uid", async (req, res)=>{
-    const adminId = req.params.uid;
+router.put("/add-customer-order/:adminId", async (req, res)=>{
+    const adminId = req.params.adminId;
     const {customerId, productId, customerOrderId, price, quentity, delivaryAddress, pincode, contactNumber} = req.body;
     try {
         if(!customerId ||  !productId ||  !customerOrderId || !price ||  !quentity ||  !delivaryAddress || !pincode || !contactNumber){
@@ -101,8 +104,8 @@ router.put("/update-delivary-status/:adminId", async (req, res)=>{
 });
 
 //Get all customer orders
-router.get("/customer-orders/:adminId", async (req, res)=>{
-    const adminId = req.params.adminId;
+router.get("/customer-orders", adminAuth, async (req, res)=>{
+    const adminId = req.adminId;
     try {
         const dbResponse = await adminModel.findById(adminId, {userName: 0, email: 0, password: 0});
         if(dbResponse){
@@ -116,8 +119,8 @@ router.get("/customer-orders/:adminId", async (req, res)=>{
 
 });
 
-router.get("/profile/:uid", async (req, res)=>{
-    const adminId = req.params.uid;
+router.get("/profile", adminAuth, async (req, res)=>{
+    const adminId = req.adminId;
     try {
         const dbResponse = await adminModel.findOne({_id: adminId});
         if(dbResponse){
@@ -127,6 +130,15 @@ router.get("/profile/:uid", async (req, res)=>{
         }
     } catch (error) {
         res.status(400).json("Invalid user id");
+    }
+});
+
+router.get("/logout", adminAuth, async (req, res)=>{
+    try {
+        res.clearCookie("user_key");
+        res.status(200).json("Logout successfully.");
+    } catch (error) {
+        res.status(400).json("Invalid user.");
     }
 });
 

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userModel = require("../models/user_models");
 const bcryptjs = require('bcryptjs');
+const userAuth = require('../auth/user_auth');
 
 
 
@@ -42,7 +43,6 @@ router.post("/signin", async (req, res) => {
                 if(ispasswordMatched){
                     //If password is matched
                     const jwtToken = await dbResponse.createJWTToken();
-                    console.log(jwtToken);
                     res.cookie("user_key", jwtToken, {expires: (new Date(Date.now() + 5184000000)), httpOnly: true});
                     res.status(200).json(dbResponse);
                 }else{
@@ -60,9 +60,9 @@ router.post("/signin", async (req, res) => {
 });
 
 //Add product to user cart 
-router.put("/add-to-cart/:uid", async (req, res)=>{
+router.put("/add-to-cart", userAuth, async (req, res)=>{
     try {
-        const userId = req.params.uid;
+        const userId = req.userId;
         const {productId, quentity} = req.body;
         // console.log(userId, productId)
         const dbResponse = await userModel.findByIdAndUpdate(userId, {$push: {cartItems: {productId, quentity}}}, {new: true});
@@ -77,9 +77,9 @@ router.put("/add-to-cart/:uid", async (req, res)=>{
 });
 
 //To update add to cart product quantity
-router.put("/add-to-cart-change-quentity/:uid", async (req, res)=>{
+router.put("/add-to-cart-change-quentity", userAuth, async (req, res)=>{
     try {
-        const userId = req.params.uid;
+        const userId = req.userId;
         const {productId, quentity} = req.body;
         console.log(productId)
         const dbResponse = await userModel.findOneAndUpdate({_id: userId, "cartItems.productId": productId }, {$set: {"cartItems.$": {productId, quentity}}}, {new: true});
@@ -96,9 +96,9 @@ router.put("/add-to-cart-change-quentity/:uid", async (req, res)=>{
 
 
 //Add product to user cart 
-router.put("/remove-from-cart/:uid", async (req, res)=>{
+router.put("/remove-from-cart", userAuth, async (req, res)=>{
     try {
-        const userId = req.params.uid;
+        const userId = req.userId;
         const {productId} = req.body;
         // console.log(userId, productId)
         const dbResponse = await userModel.findByIdAndUpdate(userId, {$pull: {cartItems: {productId}}}, {new: true});
@@ -114,9 +114,9 @@ router.put("/remove-from-cart/:uid", async (req, res)=>{
 
 
 //Add product to user cart 
-router.put("/add-to-wishlist/:uid", async (req, res)=>{
+router.put("/add-to-wishlist", userAuth, async (req, res)=>{
     try {
-        const userId = req.params.uid;
+        const userId = req.userId;
         const productId = req.body.productId;
         console.log(userId, productId)
         const dbResponse = await userModel.findByIdAndUpdate(userId, {$push: {wishlist: {productId}}}, {new: true});
@@ -132,9 +132,9 @@ router.put("/add-to-wishlist/:uid", async (req, res)=>{
 
 
 //Add product to user cart 
-router.put("/remove-from-wishlist/:uid", async (req, res)=>{
+router.put("/remove-from-wishlist", userAuth, async (req, res)=>{
     try {
-        const userId = req.params.uid;
+        const userId = req.userId;
         const productId = req.body.productId;
         console.log(userId, productId)
         const dbResponse = await userModel.findByIdAndUpdate(userId, {$pull: {wishlist: {productId} }}, {new: true});
@@ -152,11 +152,11 @@ router.put("/remove-from-wishlist/:uid", async (req, res)=>{
 
 
 //get profiles by Id
-router.get("/profile/:uId", async (req, res)=>{
+router.get("/profile", userAuth, async (req, res)=>{
     // console.log("running");
     try {
-        const _id=req.params.uId;
-        const dbResponse = await userModel.findById(_id);
+        const _id=req.userId;
+        const dbResponse = await userModel.findById(_id, {email: 0, password: 0, jwtToken: 0, mobile: 0, orderItems: 0, address: 0});
         if(dbResponse){
             res.status(200).json(dbResponse);
         }else{
@@ -168,8 +168,8 @@ router.get("/profile/:uId", async (req, res)=>{
 });
 
 //Add User Order
-router.put("/order/:uid", async (req, res)=>{
-    const userId = req.params.uid;
+router.put("/order", userAuth, async (req, res)=>{
+    const userId = req.userId;
     const { productId, price, quentity, delivaryAddress, pincode, contactNumber } = req.body;
     try {
         if(!productId || !price || !quentity || !delivaryAddress || !pincode || !contactNumber){
@@ -215,8 +215,8 @@ router.put("/update-delivary-status/:uid", async (req, res)=>{
     }
 });
 
-router.get("/my-orders/:uid", async (req, res)=>{
-    const userId = req.params.uid;
+router.get("/my-orders", userAuth, async (req, res)=>{
+    const userId = req.userId;
     try {
         const dbResponse = await userModel.findById(userId, {username: 0, mobile: 0, email: 0, password: 0, address: 0, jwtToken: 0, cartItems: 0, wishlist: 0});
         if(dbResponse){
@@ -230,6 +230,15 @@ router.get("/my-orders/:uid", async (req, res)=>{
 
 });
 
+
+router.get("/logout", userAuth, async (req, res)=>{
+    try {
+        res.clearCookie("user_key");
+        res.status(200).json("Logout successfull.");
+    } catch (error) {
+        res.status(400).json("Invalid user.");
+    }
+});
 
 
 

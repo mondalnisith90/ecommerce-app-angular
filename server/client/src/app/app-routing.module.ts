@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { AdminAllProductComponent } from './admin-all-product/admin-all-product.component';
 import { AdminSigninComponent } from './admin-signin/admin-signin.component';
 import { BuyNowComponent } from './buy-now/buy-now.component';
+import { CustomerOrderStatusComponent } from './customer-order-status/customer-order-status.component';
 import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 import { CustomerComponent } from './customer/customer.component';
 import { HomeComponent } from './home/home.component';
@@ -57,7 +59,13 @@ const routes: Routes = [
   },
   {
     path: "customer-oders",
-    component: CustomerOrdersComponent
+    component: CustomerOrdersComponent,
+    children: [
+      {
+        path: "status/:status",
+        component: CustomerOrderStatusComponent
+      }
+    ]
   },
   {
     path: "wishlist",
@@ -74,6 +82,10 @@ const routes: Routes = [
   {
     path: "product-details/:id",
     component: ProductDetailsComponent
+  },
+  {
+    path: "admin-all-product",
+    component: AdminAllProductComponent
   }
 ];
 

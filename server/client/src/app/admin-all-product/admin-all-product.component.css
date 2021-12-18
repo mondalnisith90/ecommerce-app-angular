@@ -1,0 +1,33 @@
+.header_div {
+  margin-top: 100px;
+}
+
+.category_card_item:hover {
+  z-index: 1;
+  box-shadow: 0 8px 50px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+
+.body_div {
+  margin-top: 5px;
+  padding-bottom: 10px;
+}
+
+.product_card {
+  cursor: pointer;
+}
+.product_card:hover {
+  z-index: 1 !important;
+  box-shadow: 0 8px 50px rgba(0, 0, 0, 0.1) !important;
+  transform: scale(1.05) !important;
+}
+
+.home_empty_product_text {
+  font-size: 30px;
+  color: #e30947;
+  font-weight: 900;
+  margin-top: 120px;
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+}
