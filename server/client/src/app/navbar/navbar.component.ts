@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
 import { ApplicationDataService } from '../services/application-data.service';
+import { SearchService } from '../services/search.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
   totalCartItems: number = 0;
 
 
-  constructor(private applicationDataService: ApplicationDataService, private userService: UserService, private adminService: AdminService, private router: Router) { }
+  constructor(private applicationDataService: ApplicationDataService, private searchService: SearchService, private userService: UserService, private adminService: AdminService, private router: Router) { }
 
   ngOnInit(): void {
     this.applicationDataService.getAppData().subscribe((data)=>{
@@ -70,6 +71,8 @@ export class NavbarComponent implements OnInit {
   }
 
   navbarSearchButtonClick(searchValue: string){
+    this.searchService.setSearchText(searchValue);
+    console.log("hello")
     this.router.navigate(['/']);
   }
 

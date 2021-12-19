@@ -34,6 +34,11 @@ import { MyOrdersCardItemComponent } from './my-orders-card-item/my-orders-card-
 import { AdminAllProductComponent } from './admin-all-product/admin-all-product.component';
 import { AdminAllProductCardComponent } from './admin-all-product-card/admin-all-product-card.component';
 import { CustomerOrderStatusComponent } from './customer-order-status/customer-order-status.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { SearchPipe } from './pipes/search.pipe';
+import { AdminProductSearchPipe } from './pipes/admin-product-search.pipe';
+import { AdminOrderSearchPipe } from './pipes/admin-order-search.pipe';
+
 
 
 
@@ -66,7 +71,10 @@ import { CustomerOrderStatusComponent } from './customer-order-status/customer-o
     MyOrdersCardItemComponent,
     AdminAllProductComponent,
     AdminAllProductCardComponent,
-    CustomerOrderStatusComponent
+    CustomerOrderStatusComponent,
+    SearchPipe,
+    AdminProductSearchPipe,
+    AdminOrderSearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +88,8 @@ import { CustomerOrderStatusComponent } from './customer-order-status/customer-o
     HttpClientModule,
     MatCardModule,
     MatTooltipModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -220,11 +220,21 @@ router.get("/my-orders", userAuth, async (req, res)=>{
     try {
         const dbResponse = await userModel.findById(userId, {username: 0, mobile: 0, email: 0, password: 0, address: 0, jwtToken: 0, cartItems: 0, wishlist: 0});
         if(dbResponse){
-            res.status(200).json(dbResponse);
+
+            const allOrders = dbResponse.orderItems.sort((obj1, obj2)=>{
+                return  obj2.timeStamp - obj1.timeStamp; 
+                // console.log(obj1.timeStamp.getMilliseconds(), obj2.timeStamp.getMilliseconds())
+                // return  date2.getMilliseconds() - date1.getMilliseconds(); 
+
+            });
+            // console.log(allOrders)
+            res.status(200).json(allOrders);
         }else{
             throw new Error();
         }
     } catch (error) {
+        console.log(error)
+
         res.status(400).json("Invalid user");
     }
 

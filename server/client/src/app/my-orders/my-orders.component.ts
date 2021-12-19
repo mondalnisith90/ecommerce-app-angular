@@ -16,8 +16,8 @@ export class MyOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.applicationDataService.getAppData().subscribe((appData)=>{
       if(appData.isAlreadyLogin && appData.userType==="user"){
-        this.userService.getCurrentUserAllOrders(appData.userId).subscribe((orders)=>{
-          this.currentUserOrderList = orders.orderItems;
+        this.userService.getCurrentUserAllOrders(appData.userId).subscribe((orderList)=>{
+          this.currentUserOrderList = orderList;
         }, (error)=>[
 
         ]);

@@ -1,10 +1,15 @@
 <div class="root_div">
     <div class="header_div container">
+   
         <div class="category_items_div row m-0">
             <app-category-item-card class="col-lg-1 col-md-1 col-sm-2 col-3 card me-2 my-1 category_card_item" style="width: 100px !important; height: 100px !important; cursor: pointer;" *ngFor="let category of productCategory" [category]="category" (click)="productCategoryBtnClick(category)" ></app-category-item-card>
         </div>
+        <form class="d-flex mt-1">
+          <input class="form-control me-2" #input_field type="search" placeholder="Search product..." aria-label="Search">
+          <button class="btn btn-outline-success"  >Search</button>
+        </form>
         <div class="body_div row g-3">
-          <div *ngFor="let product of allProducts"  class="col-lg-3 col-md-3 col-sm-2 col-12 p-2">
+          <div *ngFor="let product of allProducts | adminProductSearch: input_field.value"  class="col-lg-3 col-md-3 col-sm-2 col-12 p-2">
             <app-admin-all-product-card [product]="product" (eventEmiter)="getProducts(category)" ></app-admin-all-product-card>
           </div>  
           <div class="mt-2">

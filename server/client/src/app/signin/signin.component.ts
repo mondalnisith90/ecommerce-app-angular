@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicationDataService } from '../services/application-data.service';
+import { SearchService } from '../services/search.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -19,12 +20,13 @@ export class SigninComponent implements OnInit {
     // password: ""
   }
 
-  constructor(private userService: UserService, private router: Router, private applicationDataService: ApplicationDataService) { }
+  constructor(private userService: UserService, private searchService: SearchService, private router: Router, private applicationDataService: ApplicationDataService) { }
 
   ngOnInit(): void {
   }
 
   signinFormSubmit(value: any){
+    this.searchService.setSearchText("");
     this.userService.userLogin(value).subscribe((data)=>{
       setTimeout(()=>{
         this.router.navigate(['/']);

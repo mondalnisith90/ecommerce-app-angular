@@ -7,8 +7,8 @@
             </div>
         </div>
         <p class="product_price" >Price: {{product.price | currency:'INR'}}</p>
-        <p class="product_price" >Product Id: <span style="color: blue;">{{product._id}}</span></p>
-      <p class="product_description"  style="height: 53px;" >{{product.description | slice: 0:100}}...</p>
+        <p class="product_price" >Product Id: <span style="color: rgb(10, 111, 194);"> {{product._id}}  </span></p>
+      <p class="product_description"   >{{product.description | slice: 0:65}}...</p>
       </mat-card-content>
       <a [routerLink]="productDetailsUrl">View Details</a>
       <mat-card-actions class="ms-1 mb-1">

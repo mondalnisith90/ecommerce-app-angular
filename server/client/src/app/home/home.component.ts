@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/Product';
+import { ApplicationDataService } from '../services/application-data.service';
 import { ProductService } from '../services/product.service';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-home',
@@ -10,15 +12,19 @@ import { ProductService } from '../services/product.service';
 export class HomeComponent implements OnInit {
 
   productCategory = [{}];
-  products: Product[] = [];
+  products: any = [];
+  searchText: any = "";
 
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private searchSearvice: SearchService) { }
 
   ngOnInit(): void {
    this.productCategory = this.productService.getProductCategory();
    //Get all products from server for the first time by category='all'
    this.getProducts("all");
+   this.searchSearvice.getSearchText().subscribe((text)=>{
+     this.searchText = text;
+   });
 
   }
 

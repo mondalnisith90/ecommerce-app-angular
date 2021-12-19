@@ -29,8 +29,6 @@ export class ProductCardComponent implements OnInit {
       this.currentUserData = data;
       if(data.userId){
         //If user is already login
-        // console.log("Product card...");
-        // console.log(data);
         const currentUserWishList = data.wishlist;
         currentUserWishList.forEach((wishListProduct: any)=>{
           if(wishListProduct.productId === this.product._id){
@@ -106,8 +104,7 @@ export class ProductCardComponent implements OnInit {
     if(this.addToCartButtonCaption === this.addToCartText){  
       //If product is added to user cart
     this.productService.performAddToCart(this.product._id).subscribe((data)=>{
-      // console.log(data);
-      // alert("Product is added to your cart");
+   
       this.applicationDataService.setAppData({cartItems: data.cartItems});
       this.addToCartButtonCaption = this.removeFromCartText;
     }, (error)=>{
@@ -124,7 +121,6 @@ export class ProductCardComponent implements OnInit {
   }
   }else{
     alert("First signup or login");
-
   }
   }
 

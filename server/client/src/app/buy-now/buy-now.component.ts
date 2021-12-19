@@ -6,6 +6,7 @@ import { AdminService } from '../services/admin.service';
 import { ApplicationDataService } from '../services/application-data.service';
 import { ProductService } from '../services/product.service';
 import { UserService } from '../services/user.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class BuyNowComponent implements OnInit {
   productQuantity: number = 1;
   serverErrorStatus: boolean = false;
   applicationData: any = null;
-  adminId: string = "61bb0f38ed0b84f191524c23";
+  adminId: string = "";
 
   deliveryAddressForm: FormGroup = new FormGroup({
     delivaryAddress: new FormControl("", [Validators.required]),
@@ -34,6 +35,7 @@ export class BuyNowComponent implements OnInit {
       this.productId = data.productId;
       this.productQuantity = data.quantity;
     });
+    this.adminId = environment.adminId;
    }
 
   ngOnInit(): void {

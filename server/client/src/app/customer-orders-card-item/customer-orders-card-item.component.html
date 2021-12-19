@@ -21,6 +21,12 @@
            <div class="product_description my-1">
             <b>Product Id: <a [routerLink]="productDetailsUrl"> {{customerOrder.productId}}  </a></b>
             </div>
+            <div class="product_description my-1">
+              <b>Customer Id: <span style="color: rgb(15, 110, 189);"> {{customerOrder.customerId}}  </span></b>
+            </div>
+            <div class="product_description my-1">
+              <b>Order Id: <span style="color: rgb(15, 110, 189);"> {{customerOrder.customerOrderId}}  </span></b>
+            </div>
            <div class="product_description">
              Delivary Address: {{customerOrder.delivaryAddress}}
              </div>
@@ -31,15 +37,15 @@
                Phone Number: {{customerOrder.contactNumber}}
              </div> 
              <div class="product_description">
-                Product Order Date: {{customerOrder.timeStamp}}
+                Product Order Date: {{customerOrder.timeStamp | date}}
               </div>
              <div class="product_description">
                Product Delivary Date: Within 3 days
              </div>
            <div class="footer mt-3 mb-1">
             <!-- <button mat-raised-button color="secondary" class="ms-3 cart_button" >Buy now</button> -->
-            <button  class="ms-0 btn btn-success btn-sm" *ngIf="customerOrder.delivaryStatus==='pending'" (click)="alreadyDeliverBtnClick()" >Already Deliverd</button>
-            <h2 style="color: green;" *ngIf="customerOrder.delivaryStatus==='successfull'">Producr deliverd successfully</h2>
+            <button  class="ms-0 btn btn-success btn-sm" *ngIf="customerOrder.delivaryStatus==='pending'" (click)="alreadyDeliverBtnClick()" >Product Already Deliverd</button>
+            <h2 style="color: green;" *ngIf="customerOrder.delivaryStatus==='successfull'">Product deliverd successfully</h2>
             <h2 style="color: red;" *ngIf="customerOrder.delivaryStatus==='cancel'">Customer cancel this order</h2>
 
            </div>

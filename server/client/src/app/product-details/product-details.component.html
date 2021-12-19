@@ -17,8 +17,8 @@
            </div>
            <div class="footer mt-4 mb-3" *ngIf="applicationData.userType != 'admin'">
             <button class="btn btn-primary btn-sm"  (click)="buyProductBtnClick(productId)" >Buy Now</button>
-            <button class="btn btn-success btn-sm ms-2"  (click)="addToWishlistBtnClick(productId)" >Add To Wishlist</button>
-            <button class="btn btn-danger btn-sm ms-2"  (click)="addToCartBtnClick(productId)">Add To cart</button>
+            <button class="btn btn-success btn-sm ms-2"  (click)="addToWishlistBtnClick(productId)" >{{wishlistButtonCaption}}</button>
+            <button class="btn btn-danger btn-sm ms-2"  (click)="addToCartBtnClick(productId)">{{addToCartButtonCaption}}</button>
 
            </div>
       </div>

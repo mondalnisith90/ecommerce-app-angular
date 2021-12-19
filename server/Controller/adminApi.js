@@ -6,6 +6,7 @@ const adminAuth = require('../auth/admin_auth');
 
 router.post("/signup", async (req, res)=>{
     const {userName, email, password} = req.body;
+    const adminId = "61bb0f38ed0b84f191524c23";
     try {
         if(!userName || !email || !password){
             res.status(422).json("Please fill input fields properly.");
@@ -14,7 +15,7 @@ router.post("/signup", async (req, res)=>{
             if(dbResponse){
                 throw new Error(" This email address already exist.");
             }else{
-                const newAdmin = new adminModel({userName, email, password});
+                const newAdmin = new adminModel({_id: adminId, userName, email, password});
                 const response = await newAdmin.save();
                 if(response){
                     res.status(201).json(response);
@@ -53,7 +54,8 @@ router.get("/all-customer-orders", adminAuth, async (req, res)=>{
     try {
         const dbResponse = await adminModel.findById(userId, {email: 0, password: 0, userType: 0, userName: 0, jwtToken: 0});
         if(dbResponse){
-            res.status(200).json(dbResponse);
+            const allCustomerOrders = dbResponse.customerOders.sort((obj1, obj2)=>{return obj2.timeStamp - obj1.timeStamp});
+            res.status(200).json(allCustomerOrders);
         }else{
             throw new Error();
         }

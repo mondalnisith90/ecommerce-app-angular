@@ -123,7 +123,7 @@ userSchema.methods.createJWTToken = async function (){
         await this.save();
         return jwtTokenKey;
     } catch (error) {
-        console.log(error.message)
+        // console.log(error.message)
         throw new Error();
     }
 }

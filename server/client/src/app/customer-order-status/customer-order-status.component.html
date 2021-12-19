@@ -1,6 +1,6 @@
 <div class="root_div container">
      <div class="row">
-        <div class="col-md-12" *ngFor="let customerOrder of customerFilteredOrders">
+        <div class="col-md-12" *ngFor="let customerOrder of customerFilteredOrders | adminOrderSearch: searchText">
             <mat-card class="mb-2">
             <app-customer-orders-card-item  [customerOrder]="customerOrder" ></app-customer-orders-card-item>
            </mat-card>
